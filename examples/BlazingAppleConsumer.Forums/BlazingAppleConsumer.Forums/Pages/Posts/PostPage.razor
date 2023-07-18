@@ -1,0 +1,7 @@
+﻿@page "/forums/p/{*Slug}"
+
+@using BlazingApple.Forums.Components.Posts
+
+@if(_post is not null) {
+	<PostDetails Post="_post"/>
+}
