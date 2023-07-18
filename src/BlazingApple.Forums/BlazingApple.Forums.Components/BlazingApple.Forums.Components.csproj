@@ -23,6 +23,7 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageIcon>BlazingApple.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageProjectUrl>https://github.com/BlazingApple/Forum</PackageProjectUrl>
 		<Title>BlazingApple's Forum Components</Title>
 	</PropertyGroup>
@@ -44,7 +45,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\..\..\BlazingApple.png">
+		<None Include="..\..\..\..\..\BlazingApple.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
