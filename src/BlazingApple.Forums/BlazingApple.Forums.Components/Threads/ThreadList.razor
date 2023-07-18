@@ -1,0 +1,10 @@
+﻿@using BlazingApple.Forums.Shared.Models.Threads
+
+@if(Threads is not null)
+{
+	<RecordList Items="Threads" TItem="IForumThread" Context="thread" ColumnsPerRow="2">
+		<RowTemplate>
+			<ThreadRow Thread="thread"/>
+		</RowTemplate>
+	</RecordList>
+}

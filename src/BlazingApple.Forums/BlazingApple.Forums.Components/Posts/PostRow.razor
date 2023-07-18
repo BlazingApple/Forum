@@ -1,0 +1,11 @@
+﻿@using BlazingApple.Forums.Components.Votes
+@if (Post is not null) {
+	<Card Title="@Post.Title" TitleUrl="@(ForumPageRoutes.PostDetails(Post.Slug))">
+		<div class="d-flex">
+			<div class="me-4">
+				<PostVoteDisplay Post="Post"></PostVoteDisplay>
+			</div>
+			<TextLimitedSegment Content="@Post.Content"/>
+		</div>
+	</Card>
+}
