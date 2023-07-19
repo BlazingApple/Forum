@@ -1,8 +1,0 @@
-﻿@using BlazingApple.Forums.Shared.Models.Forums;
-@if (Forums is not null) {
-	<RecordList Items="Forums" Context="forum" TItem="IForum">
-		<RowTemplate>
-			<ForumRow Forum="forum"></ForumRow>
-		</RowTemplate>
-	</RecordList>
-}

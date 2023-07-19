@@ -1,9 +1,0 @@
-﻿@using BlazingApple.Forums.Shared.Models.Posts;
-@if (Posts is not null)
-{
-	<RecordList Items="Posts" TItem="IPost" Context="post" ColumnsPerRow="1">
-		<RowTemplate>
-			<PostRow Post="post"/>
-		</RowTemplate>
-	</RecordList>
-}
