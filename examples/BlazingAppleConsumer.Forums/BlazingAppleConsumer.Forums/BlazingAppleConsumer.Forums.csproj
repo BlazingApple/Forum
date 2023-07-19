@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="BlazingApple.Components" Version="2.4.3" />
-    <PackageReference Include="BlazingApple.Forums.Components" Version="0.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\BlazingApple.Forums\BlazingApple.Forums.Components\BlazingApple.Forums.Components.csproj" />
+    <ProjectReference Include="..\..\..\src\BlazingApple.Forums\BlazingApple.Forums.Shared\BlazingApple.Forums.Shared.csproj" />
   </ItemGroup>
 
 </Project>

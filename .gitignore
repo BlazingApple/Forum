@@ -346,4 +346,5 @@ README/BlazingApplesDemo.mp4
 /examples/BlazingAppleConsumer.Components/BlazingAppleConsumer.Components/wwwroot/lib/bootstrap/dist
 /examples/BlazingAppleConsumer.Components/BlazingAppleConsumer.Components/wwwroot/lib/bootstrap/js/dist
 /examples/BlazingAppleConsumer.Components/BlazingAppleConsumer.Components/wwwroot/lib/bootstrap
-/src/BlazingApple.Forums/BlazingApple.Forums.Components/wwwroot/lib/
+/src/BlazingApple.Forums/BlazingApple.Forums.Components/wwwroot/lib/*
+/examples/BlazingAppleConsumer.Forums/BlazingAppleConsumer.ForumsServerless/wwwroot/lib/*
