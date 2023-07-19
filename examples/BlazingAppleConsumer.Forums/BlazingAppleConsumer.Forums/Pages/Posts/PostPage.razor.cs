@@ -22,6 +22,7 @@ public partial class PostPage : ComponentBase
 			Title = "Hello word",
 			Content = "I like eggs",
 			UserId = "abc",
+			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(90)),
 		};
 	}
 }

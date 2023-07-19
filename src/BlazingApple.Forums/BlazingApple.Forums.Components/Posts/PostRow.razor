@@ -5,7 +5,17 @@
 			<div class="me-4">
 				<PostVoteDisplay Post="Post"></PostVoteDisplay>
 			</div>
-			<TextLimitedSegment Content="@Post.Content"/>
+			<div class="d-flex flex-column" style="justify-content:space-between;">
+				<TextLimitedSegment Content="@Post.Content"/>
+				<small class="d-flex">
+					<BrowserLink href="@(ForumPageRoutes.PostDetails(Post.Slug))" className="me-2">
+						<i class="fas fa-comments"></i> @Random.Shared.Next(100) Comments
+					</BrowserLink>
+					<button class="btn btn-sm btn-link p-0 me-2" type="button" style="line-height: 0;">
+						<i class="fas fa-share-alt"></i> Share
+					</button>
+				</small>
+			</div>
 		</div>
 	</Card>
 }
