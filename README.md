@@ -9,7 +9,7 @@ BlazingApples is an open-source set of packages that aims to speed application d
 # :video_camera: Demo
 :zap: [Check out the demo site here](https://blazingapple.github.io/Forum/).
 
-![BlazingAppleComponents](https://user-images.githubusercontent.com/3686217/184403126-a8302242-6aac-4277-a5fe-8314e6851ad3.gif)
+![BlazingAppleComponents](https://github.com/BlazingApple/Forum/blob/main/README/BlazingAppleForum.gif?raw=true)
 
 # :wrench: Installation
 
@@ -17,18 +17,17 @@ BlazingApples is an open-source set of packages that aims to speed application d
 
 1. On Client Project, right click and get to the NuGet Package Manager ("Manage NuGetPackages").
 2. Install `BlazingApple.Forums.Components` ([package also located here](https://www.nuget.org/packages/BlazingApple.Forums.Components/)).
+3. In your `index.html` file, add the required styles and scripts:
+```
+    <script src="_content/BlazingApple.Components/scripts/blazingAppleComponents.js?cacheBust={version}"></script>
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="_content/Blazored.TextEditor/quill-blot-formatter.min.js"></script>
+    <script src="_content/Blazored.TextEditor/Blazored-BlazorQuill.js"></script>
+```
 
-3. Add the following to `Program.cs's Main`:
-```
-TODO
-```
-
-4. In your `index.html` file, add the required Radzen style and script:
-```
-TODO
-```
-
-5. Add BlazingApple.Forums.Components namespaces to your imports file. Now you should be all set to use the components.
+4. Add `using BlazingApple.Forums.Components` to your imports file. Now you should be all set to use the components.
 
 <hr/>
 
