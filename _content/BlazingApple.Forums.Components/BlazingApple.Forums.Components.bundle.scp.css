@@ -1,0 +1,14 @@
+/* _content/BlazingApple.Forums.Components/Posts/Comments/PostCommentRow.razor.rz.scp.css */
+.ba-expand-button[b-j0zhwafncp] {
+  background: none;
+  border: none;
+  border-left: 2px solid gray;
+  width: 0px;
+  height: 100%;
+  padding: 0;
+  padding-right: 1.1rem;
+  margin-right: -0.75rem;
+}
+.ba-expand-button:hover[b-j0zhwafncp] {
+  border-left: 2px solid lightgray;
+}
