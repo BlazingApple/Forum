@@ -16,14 +16,14 @@
 		<RepositoryUrl>https://github.com/BlazingApple/Forum</RepositoryUrl>
 		<RepositoryType>GitHub</RepositoryType>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>0.0.3</AssemblyVersion>
-		<FileVersion>0.0.3</FileVersion>
-		<Version>0.0.3</Version>
+		<AssemblyVersion>0.0.4</AssemblyVersion>
+		<FileVersion>0.0.4</FileVersion>
+		<Version>0.0.4</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<IncludeSymbols>true</IncludeSymbols>
-		<PackageReleaseNotes>0.0.3</PackageReleaseNotes>
+		<PackageReleaseNotes>0.0.4</PackageReleaseNotes>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageProjectUrl>https://github.com/BlazingApple/Forum</PackageProjectUrl>
@@ -65,6 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Toasts\" />
 		<Folder Include="Properties\" />
 	</ItemGroup>
 

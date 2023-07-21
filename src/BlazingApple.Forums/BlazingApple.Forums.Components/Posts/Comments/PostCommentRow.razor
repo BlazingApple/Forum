@@ -61,7 +61,7 @@
 					@if(_replyOpen)
 					{
 						<div class="ms-2">
-							<AuthorPostComment UserId="abc" />
+							<AuthorPostComment UserId="abc" PostId="@Comment.PostId"  ParentCommentId="@Comment.Id" CommentSubmitted="AfterCommentSubmitted" />
 						</div>
 					}
 

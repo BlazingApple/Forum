@@ -4,8 +4,20 @@ using BlazingApple.Forums.Shared.Models.Votes;
 
 namespace BlazingApple.Forums.Shared.Models.Posts;
 
-public partial interface IPostComment : IForumRecord, IComment
+public partial interface IPostComment : IChangeTracked
 {
+	/// <summary>The string content of the comment.</summary>   
+	string Content { get; set; }
+
+	/// <summary>Id for comment.</summary>
+	Guid Id { get; set; }
+
+	/// <summary>Author users id</summary>
+	string UserId { get; set; }
+
+	/// <summary>User that authored comment</summary>
+	IUser? User { get; set; }
+
 	/// <summary><see cref="IPost"/> associated with this comment.</summary>
 	IPost? Post { get; set; }
 

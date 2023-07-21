@@ -39,5 +39,15 @@ public partial class PostCommentRow : ComponentBase
 		}
 	}
 
+	private void AfterCommentSubmitted(IPostComment newComment)
+	{
+		if(Comment is null)
+			throw new ArgumentNullException(nameof(Comment), "Unexpected null for comment.");
+
+		Comment.Children ??= new List<IPostComment>();
+		Comment.Children.Insert(0, newComment);
+		_replyOpen = false;
+	}
+
 	private void ExpandToggle() => _isExpanded = !_isExpanded;
 }

@@ -43,13 +43,4 @@ else
 	</EditorContent>
 </BlazoredTextEditor>
 
-<button class="my-2 btn btn-primary" @onclick="GetHTML">Comment</button>
-
-@if (_quillHTMLContent is not null) {
-	<div>
-		<small class="text-muted">Last updated @_commentDate.Humanize()</small>
-		<div>
-			@((MarkupString)_quillHTMLContent)
-		</div>
-	</div>
-}
+<button class="my-2 btn btn-primary" @onclick="OnCommentSubmitted">Comment</button>

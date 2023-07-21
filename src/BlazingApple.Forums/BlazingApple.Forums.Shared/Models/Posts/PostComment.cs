@@ -1,4 +1,5 @@
-﻿using BlazingApple.Forums.Shared.Models.Votes;
+﻿using BlazingApple.Components.Shared.Interfaces;
+using BlazingApple.Forums.Shared.Models.Votes;
 using Humanizer;
 
 namespace BlazingApple.Forums.Shared.Models.Posts;
@@ -37,6 +38,9 @@ public partial class PostComment : IPostComment
 
 	/// <inheritdoc />
 	public List<IPostComment>? Children { get; set; }
+
+	/// <inheritdoc />
+	public IUser? User { get; set; }
 
 	/// <inheritdoc />
 	public string ToCreationDate() => DatabaseCreationTimestamp.Humanize();

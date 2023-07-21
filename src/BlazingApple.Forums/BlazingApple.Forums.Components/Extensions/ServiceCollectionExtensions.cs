@@ -1,4 +1,5 @@
 ﻿using BlazingApple.Components.Configuration;
+using BlazingApple.Forums.Components.Services;
 using Blazored.Toast;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddBlazingAppleComponents(configRoot);
 		services.AddBlazoredToast();
+		services.AddScoped<IToastErrorService, ToastErrorService>();
 		return services;
 	}
 }

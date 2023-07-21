@@ -9,4 +9,13 @@ public partial class PostDetails : ComponentBase
 	/// <summary><see cref="IPost"/></summary>
 	[Parameter, EditorRequired]
 	public IPost? Post { get; set; }
+
+	private void AfterCommentSubmitted(IPostComment newComment)
+	{
+		if(Post is null)
+			throw new ArgumentNullException(nameof(Post), "Unexpected null for post.");
+
+		Post.Comments ??= new List<IPostComment>();
+		Post.Comments.Insert(0, newComment);
+	}
 }

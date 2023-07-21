@@ -9,5 +9,29 @@ public partial class PostCommentList : ComponentBase
 {
 	/// <summary><see cref="IPostComment"/></summary>
 	[Parameter, EditorRequired]
-	public IReadOnlyList<IPostComment>? Comments { get; set; }
+	public List<IPostComment>? Comments { get; set; }
+
+	/// <inheritdoc />
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+
+		if(Comments is not null)
+			Comments = SortComments(Comments);
+	}
+
+	private static List<IPostComment> SortComments(List<IPostComment> comments)
+	{
+		comments = comments.OrderByDescending(c => c.DatabaseCreationTimestamp).ToList();
+
+		foreach(IPostComment comment in comments)
+		{
+			if(comment.Children is null)
+				continue;
+			else
+				comment.Children = SortComments(comment.Children);
+		}
+
+		return comments;
+	}
 }

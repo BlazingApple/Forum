@@ -1,5 +1,5 @@
 using BlazingApple.Forums.Components.Extensions;
-using BlazingAppleConsumer.Forums.Data;
+using BlazingApple.Forums.Shared.Extensions;
 
 namespace BlazingAppleConsumer.Forums;
 public class Program
@@ -11,8 +11,8 @@ public class Program
 		// Add services to the container.
 		builder.Services.AddRazorPages();
 		builder.Services.AddServerSideBlazor();
-		builder.Services.AddSingleton<WeatherForecastService>();
 		builder.Services.AddForums(builder.Configuration);
+		builder.Services.AddFakeForumServices();
 		WebApplication app = builder.Build();
 
 		// Configure the HTTP request pipeline.
