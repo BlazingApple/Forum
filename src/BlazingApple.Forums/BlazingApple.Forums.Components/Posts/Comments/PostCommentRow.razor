@@ -1,0 +1,84 @@
+﻿@using BlazingApple.Forums.Components.Shared
+@using BlazingApple.Forums.Components.Votes
+@using static BlazingApple.Forums.Components.Votes.VoteToggle;
+@if (Comment is not null)
+{
+	<div class="d-flex flex-column">
+		<div>
+			<div class="todo-user-image-name d-flex align-items-center">
+				<div class="todo-user-image me-2">
+					<Badge Name="Taylor White"></Badge>
+				</div>
+				<div class="d-flex flex-column">
+					<div class="d-flex align-items-center">
+						<div id="UserInfoTooltip--t1_jsnjax9--lightbox me-1">
+							<a class="todo-user-name" data-testid="comment_author_link" href="/user/urmomluvsvntv/">urmomluvsvntv</a>
+						</div>
+						<div class="small text-muted me-2">·</div>
+						<div class="small text-muted me-2">
+							<BrowserLink className="text-muted" href="#" target="_blank" rel="nofollow noopener noreferrer">
+								@Comment.ToCreationDate()
+							</BrowserLink>
+						</div>
+					</div>
+					@if(ChildContent is not null) {
+						<div>
+							@ChildContent
+						</div>
+					}
+				</div>
+			</div>
+			
+		</div>
+		<div class="d-flex">
+			<div class="todo-expand-button-border me-2">
+				@if (_isExpanded)
+				{
+					<button type="button" class="ba-expand-button" @onclick="ExpandToggle">
+						&nbsp;
+					</button>
+				}
+			</div>
+			<div class="todo-comment-and-responses">
+				@if(_isExpanded) {
+					<div data-testid="comment" class="todo-actual-comment-text">
+						@((MarkupString)@Comment.Content)
+					</div>
+					<div class="d-flex align-items-center">
+						<div class="me-2 d-flex align-items-center">
+							<VoteToggle Direction="@VoteToggleDirection.Horizontal" Value="_commentVote?.Type" ValueChanged="VoteChanged" />
+						</div>
+						<div class="me-2 d-flex align-items-center">
+							<button class="btn btn-link btn-sm p-0" type="button" style="line-height:0;" @onclick="ReplyClicked">
+								<i class="fas fa-reply"></i> Reply
+							</button>
+						</div>
+						<div class="me-2 d-flex align-items-center">
+							<ShareButton UrlToShare="#" />
+						</div>
+					</div>
+
+					@if(_replyOpen)
+					{
+						<div class="ms-2">
+							<AuthorPostComment UserId="abc" />
+						</div>
+					}
+
+					@if(Comment.Children is not null)
+					{
+						<div class="ms-2">
+							<PostCommentList Comments="@Comment.Children"/>
+						</div>
+					}
+				}
+				else
+				{
+					<button class="btn btn-outline-primary btn-sm" @onclick="ExpandToggle">
+						<i class="fas fa-angle-double-down"></i> Expand
+					</button>
+				}
+			</div>
+		</div>
+	</div>
+}

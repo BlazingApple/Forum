@@ -18,6 +18,9 @@ public partial interface IPost : IForumSluggable
 	/// <summary>Set of votes associated with the post.</summary>
 	List<IPostVote>? Votes { get; set; }
 
+	/// <summary>Set of comments associated with the post.</summary>
+	List<IPostComment>? Comments { get; set; }
+
 	/// <summary>The thread this post was posted in.</summary>
 	IForumThread? Thread { get; set; }
 

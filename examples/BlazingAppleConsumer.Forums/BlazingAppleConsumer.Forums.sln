@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingApple.Forums.Shared"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingApple.Forums.Components", "..\..\src\BlazingApple.Forums\BlazingApple.Forums.Components\BlazingApple.Forums.Components.csproj", "{92744CED-42F3-405D-BC00-9015C1BC71D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingAppleConsumer.ForumsServerless", "BlazingAppleConsumer.ForumsServerless\BlazingAppleConsumer.ForumsServerless.csproj", "{BCA003A1-DD0C-46D0-8E08-C40894D8D36C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazingAppleConsumer.ForumsServerless", "BlazingAppleConsumer.ForumsServerless\BlazingAppleConsumer.ForumsServerless.csproj", "{BCA003A1-DD0C-46D0-8E08-C40894D8D36C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{9C33970F-5AC3-4303-BF1E-75CE2CC2B9A9}"
 	ProjectSection(SolutionItems) = preProject

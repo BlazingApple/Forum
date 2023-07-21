@@ -21,6 +21,12 @@ public partial class PostComment : IPostComment
 	public IPost? Post { get; set; }
 
 	/// <inheritdoc />
+	public IPostComment? Parent { get; set; }
+
+	/// <inheritdoc />
+	public Guid? ParentId { get; set; }
+
+	/// <inheritdoc />
 	public DateTime DatabaseCreationTimestamp { get; set; }
 
 	/// <inheritdoc />
@@ -28,6 +34,9 @@ public partial class PostComment : IPostComment
 
 	/// <inheritdoc />
 	public List<ICommentVote>? Votes { get; set; }
+
+	/// <inheritdoc />
+	public List<IPostComment>? Children { get; set; }
 
 	/// <inheritdoc />
 	public string ToCreationDate() => DatabaseCreationTimestamp.Humanize();

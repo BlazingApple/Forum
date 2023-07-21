@@ -1,4 +1,5 @@
 ﻿using BlazingApple.Forums.Shared.Models.Posts;
+using BlazingApple.Forums.Shared.Models.Votes;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingAppleConsumer.Forums.Pages.Posts;
@@ -16,13 +17,40 @@ public partial class PostPage : ComponentBase
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
-		_post = new Post()
+		_post = new Post
 		{
 			Slug = Slug,
 			Title = "Hello word",
 			Content = "I like eggs",
 			UserId = "abc",
 			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(90)),
+			Comments = GetComments()
+		};
+	}
+
+	private static List<IPostComment> GetComments() => GetCommentsCore().ToList();
+
+	private static IEnumerable<IPostComment> GetCommentsCore()
+	{
+		int commentCount = Random.Shared.Next(0, 3);
+
+		for(int i = 0; i < commentCount; i++)
+		{
+			yield return GetComment();
+		}
+	}
+
+	private static IPostComment GetComment()
+	{
+		DateTime dateTime = DateTime.Now.AddMinutes(-1 * Random.Shared.Next(0, 2500));
+		return new PostComment()
+		{
+			Content = "Lorem Ipsum",
+			UserId = "abc",
+			DatabaseCreationTimestamp = dateTime,
+			DatabaseModificationTimestamp = dateTime,
+			Votes = new List<ICommentVote>(),
+			Children = GetComments(),
 		};
 	}
 }

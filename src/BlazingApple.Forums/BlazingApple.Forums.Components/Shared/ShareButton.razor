@@ -1,0 +1,9 @@
+﻿@if(UrlToShare is not null) {
+	Uri url = NavManager.ToAbsoluteUri(UrlToShare);
+
+	<CopyToClipboard 
+		Text="@url.ToString()" 
+		DefaultButtonClass="btn btn-sm btn-link p-0 me-2" 
+		style="line-height:inherit;" 
+		ButtonDisplayText="Share"></CopyToClipboard>
+}

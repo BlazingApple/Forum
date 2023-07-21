@@ -36,6 +36,9 @@ public partial class Post : IPost
 	public Guid ThreadId { get; set; }
 
 	/// <inheritdoc />
+	public List<IPostComment>? Comments { get; set; }
+
+	/// <inheritdoc />
 	public string ToCreationDate() => DatabaseCreationTimestamp.Humanize();
 
 	/// <inheritdoc />

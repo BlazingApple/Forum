@@ -19,4 +19,13 @@ public partial interface IPostComment : IForumRecord
 
 	/// <summary>Set of votes associated with the comment.</summary>
 	List<ICommentVote>? Votes { get; set; }
+
+	/// <summary>Responses/Child comments</summary>
+	List<IPostComment>? Children { get; set; }
+
+	/// <summary>FK of the parent for this comment, e.g. which comment this was in reply to.</summary>
+	Guid? ParentId { get; set; }
+
+	/// <summary><see cref="ParentId"/></summary>
+	IPostComment? Parent { get; set; }
 }

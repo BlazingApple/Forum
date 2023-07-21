@@ -1,15 +1,35 @@
-﻿<div class="d-flex flex-column">
-	<div class="d-flex align-items-center">
-		<button class="@UpButtonClasses" type="button" @onclick="UpVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(-90deg);">
-			<span>➜</span>
-		</button>
+﻿@if (Direction is VoteToggleDirection.Vertical)
+{
+	<div class="d-flex flex-column">
+		<div class="d-flex align-items-center">
+			<button class="@UpButtonClasses" type="button" @onclick="UpVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(-90deg);">
+				<span>➜</span>
+			</button>
+		</div>
+		<div class="text-muted" style="color:#D7DADC; text-align:center;">
+			@_upVotes
+		</div>
+		<div class="d-flex align-items-center">
+			<button class="@DownButtonClasses" type="button" @onclick="DownVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(90deg);">
+				<span>➜</span>
+			</button>
+		</div>
 	</div>
-	<div class="text-muted" style="color:#D7DADC; text-align:center;">
-		@_upVotes
+}
+else {
+	<div class="d-flex small align-items-center">
+		<div class="d-flex align-items-center me-1">
+			<button class="@($"{UpButtonClasses} btn-sm")" type="button" @onclick="UpVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(-90deg);">
+				<span>➜</span>
+			</button>
+		</div>
+		<div class="text-muted me-1" style="color:#D7DADC; text-align:center;">
+			@_upVotes
+		</div>
+		<div class="d-flex align-items-center me-1">
+			<button class="@($"{DownButtonClasses} btn-sm")" type="button" @onclick="DownVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(90deg);">
+				<span>➜</span>
+			</button>
+		</div>
 	</div>
-	<div class="d-flex align-items-center">
-		<button class="@DownButtonClasses" type="button" @onclick="DownVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(90deg);">
-			<span>➜</span>
-		</button>
-	</div>
-</div>
+}

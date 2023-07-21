@@ -16,14 +16,14 @@
 		<RepositoryUrl>https://github.com/BlazingApple/Forum</RepositoryUrl>
 		<RepositoryType>GitHub</RepositoryType>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>0.0.2</AssemblyVersion>
-		<FileVersion>0.0.2</FileVersion>
-		<Version>0.0.2</Version>
+		<AssemblyVersion>0.0.3</AssemblyVersion>
+		<FileVersion>0.0.3</FileVersion>
+		<Version>0.0.3</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<IncludeSymbols>true</IncludeSymbols>
-		<PackageReleaseNotes>0.0.2</PackageReleaseNotes>
+		<PackageReleaseNotes>0.0.3</PackageReleaseNotes>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageProjectUrl>https://github.com/BlazingApple/Forum</PackageProjectUrl>
@@ -31,6 +31,10 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageTags>forums; blazor</PackageTags>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="compilerconfig.json" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
@@ -57,6 +61,7 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+		<None Include="compilerconfig.json" />
 	</ItemGroup>
 
 	<ItemGroup>

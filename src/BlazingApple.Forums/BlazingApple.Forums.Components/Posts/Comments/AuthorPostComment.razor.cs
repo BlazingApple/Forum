@@ -1,7 +1,7 @@
 ﻿using Blazored.TextEditor;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazingApple.Forums.Components.Posts;
+namespace BlazingApple.Forums.Components.Posts.Comments;
 
 public partial class AuthorPostComment : ComponentBase
 {

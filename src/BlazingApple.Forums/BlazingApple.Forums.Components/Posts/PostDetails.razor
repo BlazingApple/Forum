@@ -1,4 +1,7 @@
-﻿@using BlazingApple.Forums.Components.Votes
+﻿@using BlazingApple.Forums.Components.Posts.Comments
+@using BlazingApple.Forums.Components.Shared
+@using BlazingApple.Forums.Components.Votes
+
 @if (Post is not null)
 {
 	<div class="d-flex">
@@ -34,11 +37,19 @@
 				</div>
 				<div class="d-flex">
 					@* horizontal buttons go here *@
+					
+					@if(Post.Thread is not null)
+					{
+						<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Thread.Slug)"/>
+					}
 				</div>
 				<div class="my-3">
 					<AuthorPostComment UserId="abc" />
 				</div>
 				<hr />
+				<div>
+					<PostCommentList Comments="@Post.Comments"/>
+				</div>
 			</div>
 		</div>
 	</div>

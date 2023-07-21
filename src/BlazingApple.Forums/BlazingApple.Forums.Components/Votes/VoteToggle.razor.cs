@@ -8,8 +8,14 @@ public partial class VoteToggle : ComponentBase
 {
 	private int _upVotes = Random.Shared.Next(1000);
 	private const string _sharedButtonClasses = "btn btn-sm btn-outline-primary d-flex align-items-center";
+
+	/// <summary>The current value of the user's vote looking at the toggles.</summary>
 	[Parameter]
 	public VoteType? Value { get; set; }
+
+	/// <summary>Direction to display the arrows, aligned vertically or horizontally.</summary>
+	[Parameter]
+	public VoteToggleDirection Direction { get; set; } = VoteToggleDirection.Vertical;
 
 	/// <summary>Callback indicating a vote has changed.</summary>
 	[Parameter]
@@ -54,5 +60,11 @@ public partial class VoteToggle : ComponentBase
 			await ValueChanged.InvokeAsync(newValue);
 
 		_upVotes += changeUpVotesByThisAmount;
+	}
+
+	public enum VoteToggleDirection
+	{
+		Vertical,
+		Horizontal
 	}
 }

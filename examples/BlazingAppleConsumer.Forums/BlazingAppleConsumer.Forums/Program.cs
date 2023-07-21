@@ -1,20 +1,19 @@
+using BlazingApple.Forums.Components.Extensions;
 using BlazingAppleConsumer.Forums.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazingAppleConsumer.Forums;
 public class Program
 {
 	public static void Main(string[] args)
 	{
-		var builder = WebApplication.CreateBuilder(args);
+		WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 		// Add services to the container.
 		builder.Services.AddRazorPages();
 		builder.Services.AddServerSideBlazor();
 		builder.Services.AddSingleton<WeatherForecastService>();
-
-		var app = builder.Build();
+		builder.Services.AddForums(builder.Configuration);
+		WebApplication app = builder.Build();
 
 		// Configure the HTTP request pipeline.
 		if(!app.Environment.IsDevelopment())
