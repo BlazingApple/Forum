@@ -1,13 +1,8 @@
 ﻿@page "/forums/{Slug}"
 
 @using BlazingApple.Forums.Components.Threads
-
+@using BlazingApple.Forums.Components.Forums
 @if (_forum is not null)
 {
-	<h3>@_forum.Title</h3>
-	<small>@_forum.Description</small>
-	@if(_forum.Threads is not null)
-	{		
-		<ThreadList Threads="@_forum.Threads"/>
-	}
+	<ForumDetails Forum="_forum" Threads="_forum.Threads"></ForumDetails>
 }

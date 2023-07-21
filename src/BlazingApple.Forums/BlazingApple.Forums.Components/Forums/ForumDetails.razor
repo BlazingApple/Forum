@@ -1,0 +1,23 @@
+﻿@using BlazingApple.Forums.Components.Threads
+
+@if(Forum is not null) {
+	<Header>
+		@Forum.Title
+	</Header>
+	<div class="row">
+		<div class="col-lg-9">
+			@if(Threads is not null)
+			{
+				<ThreadList Threads="Threads" />
+			}
+		</div>
+		<div class="col-lg-3">
+			<div class="sticky-top">
+				@if(Forum is not null)
+				{
+					<AboutForum Forum="Forum" />
+				}
+			</div>
+		</div>
+	</div>
+}

@@ -10,10 +10,11 @@ h1:focus
 	outline: none;
 }
 
-a, .btn-link
+a, .btn-link, .btn.btn-primary, .btn.btn-outline-primary, .btn.btn-outline-primary:hover, .btn.btn-primary:hover
 {
 	text-decoration: none !important;
 }
+
 a:hover,a:active,.btn-link:hover, .btn-link:active
 {
 	text-decoration: underline !important;

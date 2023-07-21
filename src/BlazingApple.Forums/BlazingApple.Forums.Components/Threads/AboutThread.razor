@@ -1,0 +1,38 @@
+﻿@using BlazingApple.Forums.Components.Shared
+@if (Thread is not null) {
+	<Card BadgeTitle="@Thread.Title" Title="@($"About commmunity: {Thread.Title}")" TitleUrl="@(ForumPageRoutes.ThreadDetails(Thread.Slug))">
+		<div>
+			<p>
+				<div>
+					@Thread.Description
+				</div>
+				<div class="small text-muted">
+					<i class="fas fa-birthday-cake"></i> Created @Thread.ToCreationDate()
+				</div>
+			</p>
+			<p>
+				<div class="d-flex">
+					<div class="me-2">
+						<StackedStatistic Statistic="@Random.Shared.Next(1,2000)" Unit="members" />
+					</div>
+
+					<div class="me-2">
+						<StackedStatistic Statistic="@Random.Shared.Next(1,500)" Unit="posts" />
+					</div>
+				</div>
+			</p>
+			<p>
+				<div class="d-flex flex-column">
+					<button class="btn btn-outline-primary my-1" @onclick="JoinClicked">
+						Join
+					</button>
+
+					<BrowserLink className="btn btn-outline-primary my-1" href="@(ForumPageRoutes.AuthorPost(Thread.Slug))">
+						Create Post
+					</BrowserLink>
+				</div>
+			</p>
+		</div>
+		
+	</Card>
+}

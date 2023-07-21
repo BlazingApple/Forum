@@ -1,5 +1,6 @@
 ﻿using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Votes;
+using BlazingAppleConsumer.ForumsServerless.Pages.Forums;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingAppleConsumer.ForumsServerless.Pages.Posts;
@@ -17,6 +18,8 @@ public partial class PostPage : ComponentBase
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
+		string forumSlug = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+
 		_post = new Post
 		{
 			Slug = Slug,
@@ -24,7 +27,8 @@ public partial class PostPage : ComponentBase
 			Content = "I like eggs",
 			UserId = "abc",
 			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(90)),
-			Comments = GetComments()
+			Comments = GetComments(),
+			Thread = ForumPage.GetThread(forumSlug, "Levels of heat", "Discussing what it means to be 'Blazing'."),
 		};
 	}
 

@@ -1,0 +1,23 @@
+﻿@using BlazingApple.Forums.Components.Shared
+@if(Forum is not null) {
+	<Card BadgeTitle="@Forum.Title" Title="@($"About commmunity: {Forum.Title}")">
+	<div>
+		<div>
+			@Forum.Description
+		</div>
+		<div class="small text-muted">
+			<i class="fas fa-birthday-cake"></i> Created @Forum.ToCreationDate()
+		</div>
+		<div class="d-flex justify-content-around">
+			<StackedStatistic Statistic="@Random.Shared.Next(1,10)" Unit="threads" />
+			<StackedStatistic Statistic="@Random.Shared.Next(1,5000)" Unit="posts" />
+		</div>
+		<div class="d-flex justify-content-around">
+			<BrowserLink className="btn btn-outline-primary mx-1" href="@(ForumPageRoutes.CreateThread(Forum.Slug))">
+				Create Thread
+			</BrowserLink>
+		</div>
+	</div>
+		
+</Card>
+}

@@ -33,20 +33,17 @@ public partial class ForumPage : ComponentBase
 			Threads = new List<IForumThread>(),
 		};
 
-		_forum.Threads!.Add(GetThread("Levels of heat", "Discussing what it means to be 'Blazing'."));
-		_forum.Threads!.Add(GetThread("Best hot sauces", "How to evaluate and decide the best sauces."));
+		_forum.Threads!.Add(GetThread(_forum.Slug, "Levels of heat", "Discussing what it means to be 'Blazing'."));
+		_forum.Threads!.Add(GetThread(_forum.Slug, "Best hot sauces", "How to evaluate and decide the best sauces."));
 	}
 
-	private IForumThread GetThread(string title, string description)
+	public static IForumThread GetThread(string forumSlug, string title, string description)
 	{
-		if(_forum is null)
-			throw new InvalidOperationException();
-
 		string slug = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
 		slug = slug[..^2]
 			.Replace('/', '-')
 			.Replace('+', '_');
-		slug = $"{_forum.Slug}/{slug}";
+		slug = $"{forumSlug}/{slug}";
 
 		return new ForumThread()
 		{
@@ -55,6 +52,7 @@ public partial class ForumPage : ComponentBase
 			Title = title,
 			Description = description,
 			CreatingUserId = "abc",
+			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(0, 10000)),
 			Posts = new List<IPost>(),
 		};
 	}

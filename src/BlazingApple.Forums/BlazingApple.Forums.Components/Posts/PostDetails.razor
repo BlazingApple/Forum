@@ -1,55 +1,65 @@
 ﻿@using BlazingApple.Forums.Components.Posts.Comments
 @using BlazingApple.Forums.Components.Shared
 @using BlazingApple.Forums.Components.Votes
-
+@using BlazingApple.Forums.Components.Threads
 @if (Post is not null)
 {
-	<div class="d-flex">
-		<div class="me-2">
-			<PostVoteDisplay Post="Post"/>
-		</div>
-		<div>
-			<div class="d-flex flex-column">
-
-				<h2>@Post.Title</h2>
-				<div>
-					@if(Post.Thread is not null)
-					{
-						<small class="me-2">
-							<a href="@ForumPageRoutes.ThreadDetails(@Post.Thread.Slug)">
-								@Post.Thread.Title
-							</a>
-						</small>
-					}
-
-					<small class="text-muted">
-						<span>
-							Posted by
-						</span>
-						<a href="#">
-							@Post.UserId
-						</a>
-						<span title="@Post.DatabaseCreationTimestamp.ToLongDateString()"> @Post.ToCreationDate()</span>
-					</small>
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="d-flex">
+				<div class="me-2">
+					<PostVoteDisplay Post="Post"/>
 				</div>
-				<div>
-					@Post.Content
-				</div>
-				<div class="d-flex">
-					@* horizontal buttons go here *@
+				<div style="width: 100%;">
+					<div class="d-flex flex-column">
+						<h2>@Post.Title</h2>
+						<div>
+							@if(Post.Thread is not null)
+							{
+								<small class="me-2">
+									<a href="@ForumPageRoutes.ThreadDetails(@Post.Thread.Slug)">
+										@Post.Thread.Title
+									</a>
+								</small>
+							}
+
+							<small class="text-muted">
+								<span>
+									Posted by
+								</span>
+								<a href="#">
+									@Post.UserId
+								</a>
+								<span title="@Post.DatabaseCreationTimestamp.ToLongDateString()"> @Post.ToCreationDate()</span>
+							</small>
+						</div>
+						<div>
+							@Post.Content
+						</div>
+						<div class="d-flex">
+							@* horizontal buttons go here *@
 					
-					@if(Post.Thread is not null)
-					{
-						<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Thread.Slug)"/>
-					}
+							@if(Post.Thread is not null)
+							{
+								<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Thread.Slug)"/>
+							}
+						</div>
+						<div class="my-3">
+							<AuthorPostComment UserId="abc" PostId="@Post.Id" CommentSubmitted="AfterCommentSubmitted" />
+						</div>
+						<hr />
+						<div>
+							<PostCommentList Comments="@Post.Comments"/>
+						</div>
+					</div>
 				</div>
-				<div class="my-3">
-					<AuthorPostComment UserId="abc" PostId="@Post.Id" CommentSubmitted="AfterCommentSubmitted" />
-				</div>
-				<hr />
-				<div>
-					<PostCommentList Comments="@Post.Comments"/>
-				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="sticky-top">
+				@if(Post.Thread is not null) {
+					<AboutThread Thread="@Post.Thread"/>
+				}
 			</div>
 		</div>
 	</div>
