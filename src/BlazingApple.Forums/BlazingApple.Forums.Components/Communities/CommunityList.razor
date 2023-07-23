@@ -1,0 +1,10 @@
+﻿@using BlazingApple.Forums.Shared.Models.Communities
+
+@if(Communities is not null)
+{
+	<RecordList Items="Communities" TItem="IForumCommunity" Context="community" ColumnsPerRow="2">
+		<RowTemplate>
+			<CommunityRow Community="community"/>
+		</RowTemplate>
+	</RecordList>
+}

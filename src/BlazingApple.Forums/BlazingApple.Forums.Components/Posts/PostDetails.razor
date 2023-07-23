@@ -1,24 +1,28 @@
-﻿@using BlazingApple.Forums.Components.Posts.Comments
+﻿@using BlazingApple.Components.Reactions
+@using BlazingApple.Forums.Components.Posts.Comments
 @using BlazingApple.Forums.Components.Shared
 @using BlazingApple.Forums.Components.Votes
-@using BlazingApple.Forums.Components.Threads
+@using BlazingApple.Forums.Components.Communities
 @if (Post is not null)
 {
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="d-flex">
-				<div class="me-2">
-					<PostVoteDisplay Post="Post"/>
-				</div>
-				<div style="width: 100%;">
+				@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
+				{
+					<div class="me-2">
+						<PostVoteDisplay Post="Post"/>
+					</div>
+				}
+				<div style="width: 100%; overflow: auto;">
 					<div class="d-flex flex-column">
 						<h2>@Post.Title</h2>
 						<div>
-							@if(Post.Thread is not null)
+							@if(Post.Community is not null)
 							{
 								<small class="me-2">
-									<a href="@ForumPageRoutes.ThreadDetails(@Post.Thread.Slug)">
-										@Post.Thread.Title
+									<a href="@ForumPageRoutes.CommunityDetails(@Post.Community.Slug)">
+										@Post.Community.Title
 									</a>
 								</small>
 							}
@@ -36,12 +40,20 @@
 						<div>
 							@Post.Content
 						</div>
-						<div class="d-flex">
+						<div class="d-flex align-items-center">
 							@* horizontal buttons go here *@
 					
-							@if(Post.Thread is not null)
+							@if(Post.Community is not null)
 							{
-								<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Thread.Slug)"/>
+								<div class="me-2">
+									<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Community.Slug)"/>
+								</div>
+								@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+								{
+									<div class="me-2">
+										<ReactionButton Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />
+									</div>
+								}
 							}
 						</div>
 						<div class="my-3">
@@ -57,8 +69,8 @@
 		</div>
 		<div class="col-lg-4">
 			<div class="sticky-top">
-				@if(Post.Thread is not null) {
-					<AboutThread Thread="@Post.Thread"/>
+				@if(Post.Community is not null) {
+					<AboutCommunity Community="@Post.Community"/>
 				}
 			</div>
 		</div>

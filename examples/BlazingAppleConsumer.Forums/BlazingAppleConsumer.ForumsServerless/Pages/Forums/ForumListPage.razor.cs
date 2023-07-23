@@ -1,5 +1,5 @@
-﻿using BlazingApple.Forums.Shared.Models.Forums;
-using BlazingApple.Forums.Shared.Models.Threads;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
+using BlazingApple.Forums.Shared.Models.Forums;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingAppleConsumer.ForumsServerless.Pages.Forums;
@@ -33,7 +33,7 @@ public partial class ForumListPage : ComponentBase
 			Title = title,
 			Description = description,
 			IsPublic = true,
-			Threads = new List<IForumThread>(),
+			Communities = new List<IForumCommunity>(),
 		};
 	}
 }

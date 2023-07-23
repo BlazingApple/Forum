@@ -1,4 +1,5 @@
-﻿using BlazingApple.Forums.Shared.Models.Threads;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
+using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
 using Humanizer;
 
@@ -27,13 +28,16 @@ public partial class Post : IPost
 	public List<IPostVote>? Votes { get; set; }
 
 	/// <inheritdoc />
+	public List<IPostReaction>? Reactions { get; set; }
+
+	/// <inheritdoc />
 	public required string Slug { get; set; }
 
 	/// <inheritdoc />
-	public IForumThread? Thread { get; set; }
+	public IForumCommunity? Community { get; set; }
 
 	/// <inheritdoc />
-	public Guid ThreadId { get; set; }
+	public Guid CommunityId { get; set; }
 
 	/// <inheritdoc />
 	public List<IPostComment>? Comments { get; set; }

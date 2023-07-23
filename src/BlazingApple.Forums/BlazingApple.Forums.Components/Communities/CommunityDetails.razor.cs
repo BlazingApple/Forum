@@ -1,11 +1,11 @@
-﻿using BlazingApple.Forums.Shared.Models.Posts;
-using BlazingApple.Forums.Shared.Models.Threads;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
+using BlazingApple.Forums.Shared.Models.Posts;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazingApple.Forums.Components.Threads;
+namespace BlazingApple.Forums.Components.Communities;
 
 /// <summary>Details about a forum.</summary>
-public partial class ThreadDetails : ComponentBase
+public partial class CommunityDetails : ComponentBase
 {
 	/// <summary>List of threads to render.</summary>
 	[Parameter, EditorRequired]
@@ -13,6 +13,6 @@ public partial class ThreadDetails : ComponentBase
 
 	/// <summary>Forum details to render.</summary>
 	[Parameter, EditorRequired]
-	public IForumThread? Thread { get; set; }
+	public IForumCommunity? Community { get; set; }
 }
 

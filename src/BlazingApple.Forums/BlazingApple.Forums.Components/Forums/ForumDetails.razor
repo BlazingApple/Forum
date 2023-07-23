@@ -1,4 +1,4 @@
-﻿@using BlazingApple.Forums.Components.Threads
+﻿@using BlazingApple.Forums.Components.Communities
 
 @if(Forum is not null) {
 	<Header>
@@ -6,9 +6,9 @@
 	</Header>
 	<div class="row">
 		<div class="col-lg-9">
-			@if(Threads is not null)
+			@if(Communities is not null)
 			{
-				<ThreadList Threads="Threads" />
+				<CommunityList Communities="Communities" />
 			}
 		</div>
 		<div class="col-lg-3">

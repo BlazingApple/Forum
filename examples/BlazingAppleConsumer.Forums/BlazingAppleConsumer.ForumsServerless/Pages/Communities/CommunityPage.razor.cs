@@ -1,14 +1,15 @@
 ﻿using BlazingApple.Forums.Shared.Models.Base;
+using BlazingApple.Forums.Shared.Models.Communities;
 using BlazingApple.Forums.Shared.Models.Posts;
-using BlazingApple.Forums.Shared.Models.Threads;
+using BlazingAppleConsumer.ForumsServerless.Pages.Posts;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazingAppleConsumer.Forums.Pages.Threads;
+namespace BlazingAppleConsumer.ForumsServerless.Pages.Communities;
 
-/// <summary>Renders a <see cref="IForumThread"/></summary>
-public partial class ThreadPage : ComponentBase
+/// <summary>Renders a <see cref="IForumCommunity"/></summary>
+public partial class CommunityPage : ComponentBase
 {
-	private IForumThread? _thread;
+	private IForumCommunity? _community;
 
 	/// <summary><see cref="IForumSluggable"/></summary>
 	[Parameter, EditorRequired]
@@ -17,7 +18,7 @@ public partial class ThreadPage : ComponentBase
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
-		_thread = new ForumThread()
+		_community = new ForumCommunity()
 		{
 			Title = "Blazing Heat",
 			Slug = Slug,
@@ -27,9 +28,9 @@ public partial class ThreadPage : ComponentBase
 			Posts = new List<IPost>()
 		};
 
-		_thread.Posts!.Add(GetPost("Best Sauces from Each Country", "I love them all"));
-		_thread.Posts!.Add(GetPost("Best Sauces from Each City", "Louisiana does it best"));
-		_thread.Posts!.Add(GetPost("How to recover your tongue from a sauce burn", "hot hot hot"));
+		_community.Posts!.Add(GetPost("Best Sauces from Each Country", "I love them all"));
+		_community.Posts!.Add(GetPost("Best Sauces from Each City", "Louisiana does it best"));
+		_community.Posts!.Add(GetPost("How to recover your tongue from a sauce burn", "hot hot hot"));
 	}
 
 	private IPost GetPost(string title, string content)
@@ -47,6 +48,7 @@ public partial class ThreadPage : ComponentBase
 			Title = title,
 			Content = content,
 			UserId = "abc",
+			Reactions = PostPage.GetReactions(),
 		};
 	}
 }

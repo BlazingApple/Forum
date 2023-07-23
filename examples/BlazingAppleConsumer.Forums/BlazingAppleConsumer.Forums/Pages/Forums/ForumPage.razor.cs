@@ -1,6 +1,6 @@
-﻿using BlazingApple.Forums.Shared.Models.Forums;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
+using BlazingApple.Forums.Shared.Models.Forums;
 using BlazingApple.Forums.Shared.Models.Posts;
-using BlazingApple.Forums.Shared.Models.Threads;
 using Microsoft.AspNetCore.Components;
 using ForumModel = BlazingApple.Forums.Shared.Models.Forums.Forum;
 namespace BlazingAppleConsumer.Forums.Pages.Forums;
@@ -30,14 +30,14 @@ public partial class ForumPage : ComponentBase
 			Description = "Forum for discussion of BlazingApple topics.",
 			IsPublic = true,
 			Members = null,
-			Threads = new List<IForumThread>(),
+			Communities = new List<IForumCommunity>(),
 		};
 
-		_forum.Threads!.Add(GetThread(_forum.Slug, "Levels of heat", "Discussing what it means to be 'Blazing'."));
-		_forum.Threads!.Add(GetThread(_forum.Slug, "Best hot sauces", "How to evaluate and decide the best sauces."));
+		_forum.Communities!.Add(GetCommunity(_forum.Slug, "Levels of heat", "Discussing what it means to be 'Blazing'."));
+		_forum.Communities!.Add(GetCommunity(_forum.Slug, "Best hot sauces", "How to evaluate and decide the best sauces."));
 	}
 
-	public static IForumThread GetThread(string forumSlug, string title, string description)
+	public static IForumCommunity GetCommunity(string forumSlug, string title, string description)
 	{
 		string slug = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
 		slug = slug[..^2]
@@ -45,7 +45,7 @@ public partial class ForumPage : ComponentBase
 			.Replace('+', '_');
 		slug = $"{forumSlug}/{slug}";
 
-		return new ForumThread()
+		return new ForumCommunity()
 		{
 			Id = Guid.NewGuid(),
 			Slug = slug,

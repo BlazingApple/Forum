@@ -1,14 +1,14 @@
 ﻿using BlazingApple.Forums.Shared.Models.Base;
 using Humanizer;
 
-namespace BlazingApple.Forums.Shared.Models.Threads;
-public class ThreadMembership : MembershipBase, IThreadMembership
+namespace BlazingApple.Forums.Shared.Models.Communities;
+public class CommunityMembership : MembershipBase, ICommunityMembership
 {
 	/// <inheritdoc />
-	public Guid ThreadId { get; set; }
+	public Guid CommunityId { get; set; }
 
 	/// <inheritdoc />
-	public IForumThread? Thread { get; set; }
+	public IForumCommunity? Community { get; set; }
 
 	/// <inheritdoc />
 	public new string ToCreationDate() => DatabaseCreationTimestamp.Humanize();

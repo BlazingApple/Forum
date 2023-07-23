@@ -1,4 +1,4 @@
-﻿using BlazingApple.Forums.Shared.Models.Threads;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
 using Humanizer;
 
 namespace BlazingApple.Forums.Shared.Models.Forums;
@@ -20,7 +20,7 @@ public class Forum : IForum
 	public bool IsPublic { get; set; }
 
 	/// <inheritdoc />
-	public List<IForumThread>? Threads { get; set; }
+	public List<IForumCommunity>? Communities { get; set; }
 
 	/// <inheritdoc />
 	public List<IForumMembership>? Members { get; set; }

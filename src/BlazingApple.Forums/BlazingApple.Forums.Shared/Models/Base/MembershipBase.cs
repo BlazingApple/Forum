@@ -1,4 +1,4 @@
-﻿using BlazingApple.Forums.Shared.Models.Threads;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
 using Humanizer;
 
 namespace BlazingApple.Forums.Shared.Models.Base;

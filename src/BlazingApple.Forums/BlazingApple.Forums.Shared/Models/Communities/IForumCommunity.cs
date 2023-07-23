@@ -2,10 +2,10 @@
 using BlazingApple.Forums.Shared.Models.Forums;
 using BlazingApple.Forums.Shared.Models.Posts;
 
-namespace BlazingApple.Forums.Shared.Models.Threads;
+namespace BlazingApple.Forums.Shared.Models.Communities;
 
 /// <summary>A grouping of <see cref="IPost"/> under a specific topic.</summary>
-public interface IForumThread : IForumSluggable
+public interface IForumCommunity : IForumSluggable
 {
 	/// <summary>The name / title of the thread.</summary>
 	string Title { get; set; }
@@ -22,6 +22,6 @@ public interface IForumThread : IForumSluggable
 	/// <summary>The forum the thread is associated with.</summary>
 	IForum? Forum { get; set; }
 
-	/// <summary>Posts associated with <see cref="IForumThread"/></summary>
+	/// <summary>Posts associated with <see cref="IForumCommunity"/></summary>
 	List<IPost>? Posts { get; set; }
 }

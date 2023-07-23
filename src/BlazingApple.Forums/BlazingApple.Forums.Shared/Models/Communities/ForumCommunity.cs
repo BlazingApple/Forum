@@ -2,8 +2,8 @@
 using BlazingApple.Forums.Shared.Models.Posts;
 using Humanizer;
 
-namespace BlazingApple.Forums.Shared.Models.Threads;
-public class ForumThread : IForumThread
+namespace BlazingApple.Forums.Shared.Models.Communities;
+public class ForumCommunity : IForumCommunity
 {
 	/// <inheritdoc />
 	public Guid Id { get; set; }

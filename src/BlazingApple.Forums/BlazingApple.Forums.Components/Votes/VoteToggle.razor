@@ -19,7 +19,7 @@
 else {
 	<div class="d-flex small align-items-center">
 		<div class="d-flex align-items-center me-1">
-			<button class="@($"{UpButtonClasses} btn-sm")" type="button" @onclick="UpVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(-90deg);">
+			<button class="@($"{UpButtonClasses} btn-sm")" type="button" @onclick="UpVoteSelected" style="@($"{_sharedButtonStyles} transform: rotateZ(-90deg);")">
 				<span>➜</span>
 			</button>
 		</div>
@@ -27,7 +27,7 @@ else {
 			@_upVotes
 		</div>
 		<div class="d-flex align-items-center me-1">
-			<button class="@($"{DownButtonClasses} btn-sm")" type="button" @onclick="DownVoteSelected" style="border-radius: 50%; width: 2rem; height: 2rem; transform: rotateZ(90deg);">
+			<button class="@($"{DownButtonClasses} btn-sm")" type="button" @onclick="DownVoteSelected" style="@($"{_sharedButtonStyles} transform: rotateZ(90deg);")">
 				<span>➜</span>
 			</button>
 		</div>

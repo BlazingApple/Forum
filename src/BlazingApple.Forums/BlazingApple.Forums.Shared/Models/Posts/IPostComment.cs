@@ -1,5 +1,7 @@
 ﻿using BlazingApple.Components.Shared.Interfaces;
+using BlazingApple.Components.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Base;
+using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
 
 namespace BlazingApple.Forums.Shared.Models.Posts;
@@ -27,6 +29,9 @@ public partial interface IPostComment : IChangeTracked
 	/// <summary>Set of votes associated with the comment.</summary>
 	List<ICommentVote>? Votes { get; set; }
 
+	/// <summary>Set of reactions associated with the comment.</summary>
+	List<ICommentReaction>? Reactions { get; set; }
+
 	/// <summary>Responses/Child comments</summary>
 	List<IPostComment>? Children { get; set; }
 
@@ -35,4 +40,9 @@ public partial interface IPostComment : IChangeTracked
 
 	/// <summary><see cref="ParentId"/></summary>
 	IPostComment? Parent { get; set; }
+
+	/// <summary>Get the number of reactions by <see cref="ReactionType"/></summary>
+	/// <returns>A dictionary representing the number of reactions by <see cref="ReactionType"/></returns>
+	public virtual IDictionary<ReactionType, int>? GetReactionCounts()
+		=> Reactions?.GroupBy(r => r.Type).ToDictionary(grp => grp.Key, grp => grp.Count());
 }

@@ -1,18 +1,32 @@
-﻿@using BlazingApple.Forums.Components.Shared
+﻿@using BlazingApple.Components.Reactions
+@using BlazingApple.Forums.Components.Shared
 @using BlazingApple.Forums.Components.Votes
 @if (Post is not null) {
 	<Card Title="@Post.Title" TitleUrl="@(ForumPageRoutes.PostDetails(Post.Slug))">
 		<div class="d-flex">
-			<div class="me-4">
-				<PostVoteDisplay Post="Post"></PostVoteDisplay>
-			</div>
+			@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
+			{
+				<div class="me-4">
+					<PostVoteDisplay Post="Post"></PostVoteDisplay>
+				</div>
+			}
 			<div class="d-flex flex-column" style="justify-content:space-between;">
 				<TextLimitedSegment Content="@Post.Content"/>
 				<small class="d-flex">
 					<BrowserLink href="@(ForumPageRoutes.PostDetails(Post.Slug))" className="me-2">
 						<i class="fas fa-comments"></i> @Random.Shared.Next(100) Comments
 					</BrowserLink>
-					<ShareButton UrlToShare="@(ForumPageRoutes.PostDetails(Post.Slug))"/>
+
+					@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+					{
+						<div class="me-2">
+							<ReactionButton Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />
+						</div>
+					}
+
+					<div class="me-2">
+						<ShareButton UrlToShare="@(ForumPageRoutes.PostDetails(Post.Slug))"/>
+					</div>
 				</small>
 			</div>
 		</div>

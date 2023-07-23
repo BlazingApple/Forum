@@ -1,4 +1,6 @@
-﻿using BlazingApple.Forums.Shared.Models.Posts;
+﻿using BlazingApple.Components.Shared.Models.Reactions;
+using BlazingApple.Forums.Shared.Models.Posts;
+using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
 using BlazingAppleConsumer.ForumsServerless.Pages.Forums;
 using Microsoft.AspNetCore.Components;
@@ -28,7 +30,8 @@ public partial class PostPage : ComponentBase
 			UserId = "abc",
 			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(90)),
 			Comments = GetComments(),
-			Thread = ForumPage.GetThread(forumSlug, "Levels of heat", "Discussing what it means to be 'Blazing'."),
+			Community = ForumPage.GetThread(forumSlug, "Levels of heat", "Discussing what it means to be 'Blazing'."),
+			Reactions = GetReactions(),
 		};
 	}
 
@@ -55,6 +58,49 @@ public partial class PostPage : ComponentBase
 			DatabaseModificationTimestamp = dateTime,
 			Votes = new List<ICommentVote>(),
 			Children = GetComments(),
+			Reactions = GetCommentReactions(),
 		};
+	}
+
+	public static List<ICommentReaction> GetCommentReactions()
+	{
+		List<ICommentReaction> reactions = new();
+		int reactionCount = Random.Shared.Next(0, 50);
+		int reactionOptions = Enum.GetValues<ReactionType>().Length;
+		for(int i = 0; i < reactionCount; i++)
+		{
+			ICommentReaction reaction = new CommentReaction()
+			{
+				Type = Enum.GetValues<ReactionType>()[Random.Shared.Next(0, reactionOptions - 1)],
+				DatabaseCreationTimestamp = DateTime.Now.AddDays(-12),
+				UserId = "abc",
+				CommentId = Guid.NewGuid(),
+			};
+
+			reactions.Add(reaction);
+		}
+
+		return reactions;
+	}
+
+	public static List<IPostReaction> GetReactions()
+	{
+		List<IPostReaction> reactions = new();
+		int reactionCount = Random.Shared.Next(0, 50);
+		int reactionOptions = Enum.GetValues<ReactionType>().Length;
+		for(int i = 0; i < reactionCount; i++)
+		{
+			IPostReaction reaction = new PostReaction()
+			{
+				Type = Enum.GetValues<ReactionType>()[Random.Shared.Next(0, reactionOptions - 1)],
+				DatabaseCreationTimestamp = DateTime.Now.AddDays(-12),
+				UserId = "abc",
+				PostId = Guid.NewGuid(),
+			};
+
+			reactions.Add(reaction);
+		}
+
+		return reactions;
 	}
 }

@@ -1,6 +1,6 @@
-﻿namespace BlazingApple.Forums.Shared.Models.Threads;
+﻿namespace BlazingApple.Forums.Shared.Models.Communities;
 
-/// <summary>Describes the status of a member in a <see cref="IForumThread"/></summary>
+/// <summary>Describes the status of a member in a <see cref="IForumCommunity"/></summary>
 public enum MembershipStatus
 {
 	/// <summary>Participant/regular member of a thread.</summary>

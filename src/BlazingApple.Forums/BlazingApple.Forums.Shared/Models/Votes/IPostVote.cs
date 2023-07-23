@@ -6,7 +6,7 @@ namespace BlazingApple.Forums.Shared.Models.Votes;
 public interface IPostVote : IVote
 {
 	/// <summary>FK for voted on <see cref="IPost"/></summary>
-	public Guid PostId { get; set; }
+	Guid PostId { get; set; }
 
 	/// <summary><see cref="IPost"/> being voted on.</summary>
 	IPost? Post { get; set; }

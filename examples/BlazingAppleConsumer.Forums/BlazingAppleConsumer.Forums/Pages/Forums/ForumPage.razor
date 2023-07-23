@@ -1,8 +1,8 @@
 ﻿@page "/forums/{Slug}"
 
-@using BlazingApple.Forums.Components.Threads
+@using BlazingApple.Forums.Components.Communities
 @using BlazingApple.Forums.Components.Forums
 @if (_forum is not null)
 {
-	<ForumDetails Forum="_forum" Threads="_forum.Threads"></ForumDetails>
+	<ForumDetails Forum="_forum" Communities="_forum.Communities"></ForumDetails>
 }

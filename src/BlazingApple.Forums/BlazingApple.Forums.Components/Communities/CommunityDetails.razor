@@ -1,8 +1,8 @@
-﻿@using BlazingApple.Forums.Components.Threads
+﻿@using BlazingApple.Forums.Components.Communities
 @using BlazingApple.Forums.Components.Posts
-@if(Thread is not null) {
+@if(Community is not null) {
 	<Header>
-		@Thread.Title
+		@Community.Title
 	</Header>
 	<div class="row">
 		<div class="col-lg-9">
@@ -13,9 +13,9 @@
 		</div>
 		<div class="col-lg-3">
 			<div class="sticky-top">
-				@if (Thread is not null)
+				@if (Community is not null)
 				{
-					<AboutThread Thread="Thread" />
+					<AboutCommunity Community="Community" />
 				}
 			</div>
 		</div>

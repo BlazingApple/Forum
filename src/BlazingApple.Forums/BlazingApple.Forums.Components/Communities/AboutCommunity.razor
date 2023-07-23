@@ -1,13 +1,13 @@
 ﻿@using BlazingApple.Forums.Components.Shared
-@if (Thread is not null) {
-	<Card BadgeTitle="@Thread.Title" Title="@($"About commmunity: {Thread.Title}")" TitleUrl="@(ForumPageRoutes.ThreadDetails(Thread.Slug))">
+@if (Community is not null) {
+	<Card BadgeTitle="@Community.Title" Title="@($"About commmunity: {Community.Title}")" TitleUrl="@(ForumPageRoutes.CommunityDetails(Community.Slug))">
 		<div>
 			<p>
 				<div>
-					@Thread.Description
+					@Community.Description
 				</div>
 				<div class="small text-muted">
-					<i class="fas fa-birthday-cake"></i> Created @Thread.ToCreationDate()
+					<i class="fas fa-birthday-cake"></i> Created @Community.ToCreationDate()
 				</div>
 			</p>
 			<p>
@@ -27,7 +27,7 @@
 						Join
 					</button>
 
-					<BrowserLink className="btn btn-outline-primary my-1" href="@(ForumPageRoutes.AuthorPost(Thread.Slug))">
+					<BrowserLink className="btn btn-outline-primary my-1" href="@(ForumPageRoutes.AuthorPost(Community.Slug))">
 						Create Post
 					</BrowserLink>
 				</div>

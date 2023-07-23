@@ -1,0 +1,8 @@
+﻿@page "/forums/t/{*Slug}"
+@using BlazingApple.Forums.Components.Posts
+@using BlazingApple.Forums.Components.Communities
+
+@if (_community is not null)
+{
+	<CommunityDetails Community="_community" Posts="_community.Posts"></CommunityDetails>
+}

@@ -1,8 +1,0 @@
-﻿@page "/forums/t/{*Slug}"
-@using BlazingApple.Forums.Components.Posts
-@using BlazingApple.Forums.Components.Threads
-
-@if (_thread is not null)
-{
-	<ThreadDetails Thread="_thread" Posts="_thread.Posts"></ThreadDetails>
-}

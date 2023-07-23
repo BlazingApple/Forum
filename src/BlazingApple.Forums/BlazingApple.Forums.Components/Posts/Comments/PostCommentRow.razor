@@ -1,4 +1,5 @@
-﻿@using BlazingApple.Forums.Components.Shared
+﻿@using BlazingApple.Components.Reactions
+@using BlazingApple.Forums.Components.Shared
 @using BlazingApple.Forums.Components.Votes
 @using static BlazingApple.Forums.Components.Votes.VoteToggle;
 @if (Comment is not null)
@@ -45,9 +46,20 @@
 						@((MarkupString)@Comment.Content)
 					</div>
 					<div class="d-flex align-items-center">
-						<div class="me-2 d-flex align-items-center">
-							<VoteToggle Direction="@VoteToggleDirection.Horizontal" Value="_commentVote?.Type" ValueChanged="VoteChanged" />
-						</div>
+						@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
+						{
+							<div class="me-2 d-flex align-items-center">
+								<VoteToggle Direction="@VoteToggleDirection.Horizontal" Value="_commentVote?.Type" ValueChanged="VoteChanged" />
+							</div>
+						}
+						
+						@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+						{
+							<div class="me-2 d-flex align-items-center">
+								<ReactionButton Value="_commentReaction?.Type" ValueChanged="ReactionChanged" Reactions="Comment.GetReactionCounts()" />
+							</div>
+						}
+
 						<div class="me-2 d-flex align-items-center">
 							<button class="btn btn-link btn-sm p-0" type="button" style="line-height:0;" @onclick="ReplyClicked">
 								<i class="fas fa-reply"></i> Reply

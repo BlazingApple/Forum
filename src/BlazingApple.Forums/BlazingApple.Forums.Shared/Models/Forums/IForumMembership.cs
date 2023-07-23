@@ -1,5 +1,5 @@
 ﻿using BlazingApple.Forums.Shared.Models.Base;
-using BlazingApple.Forums.Shared.Models.Threads;
+using BlazingApple.Forums.Shared.Models.Communities;
 
 namespace BlazingApple.Forums.Shared.Models.Forums;
 

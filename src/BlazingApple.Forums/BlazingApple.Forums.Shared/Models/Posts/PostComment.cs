@@ -1,4 +1,5 @@
 ﻿using BlazingApple.Components.Shared.Interfaces;
+using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
 using Humanizer;
 
@@ -35,6 +36,9 @@ public partial class PostComment : IPostComment
 
 	/// <inheritdoc />
 	public List<ICommentVote>? Votes { get; set; }
+
+	/// <inheritdoc />
+	public List<ICommentReaction>? Reactions { get; set; }
 
 	/// <inheritdoc />
 	public List<IPostComment>? Children { get; set; }

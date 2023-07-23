@@ -1,0 +1,6 @@
+﻿@if (Community is not null)
+{
+	<Card style="width: 100%;" Title="@Community.Title" TitleUrl="@(ForumPageRoutes.CommunityDetails(Community.Slug))">
+		@Community.Description
+	</Card>
+}

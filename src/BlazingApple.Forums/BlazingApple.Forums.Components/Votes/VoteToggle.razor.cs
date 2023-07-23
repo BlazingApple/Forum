@@ -7,7 +7,8 @@ namespace BlazingApple.Forums.Components.Votes;
 public partial class VoteToggle : ComponentBase
 {
 	private int _upVotes = Random.Shared.Next(1000);
-	private const string _sharedButtonClasses = "btn btn-sm btn-outline-primary d-flex align-items-center";
+	private const string _sharedButtonClasses = "btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center";
+	private const string _sharedButtonStyles = "border-radius: 50%; width: 1.5rem; height: 1.5rem;";
 
 	/// <summary>The current value of the user's vote looking at the toggles.</summary>
 	[Parameter]

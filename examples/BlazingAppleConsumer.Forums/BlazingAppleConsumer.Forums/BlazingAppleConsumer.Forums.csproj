@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\BlazingAppleConsumer.ForumsServerless\Pages\Threads\ThreadDetails.razor" Link="ThreadDetails.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\src\BlazingApple.Forums\BlazingApple.Forums.Components\BlazingApple.Forums.Components.csproj" />
     <ProjectReference Include="..\..\..\src\BlazingApple.Forums\BlazingApple.Forums.Shared\BlazingApple.Forums.Shared.csproj" />
   </ItemGroup>
