@@ -1,0 +1,27 @@
+﻿@if (Comment is not null)
+{
+	<div class="todo-user-image-name d-flex align-items-center">
+		<div class="todo-user-image me-2">
+			<Badge Name="Taylor White"></Badge>
+		</div>
+		<div class="d-flex flex-column">
+			<div class="d-flex align-items-center">
+				<div id="UserInfoTooltip--t1_jsnjax9--lightbox me-1">
+					<a class="todo-user-name" data-testid="comment_author_link" href="/user/urmomluvsvntv/">urmomluvsvntv</a>
+				</div>
+				<div class="small text-muted me-2">·</div>
+				<div class="small text-muted me-2">
+					<BrowserLink className="text-muted" href="#" target="_blank" rel="nofollow noopener noreferrer">
+						@Comment.ToCreationDate()
+					</BrowserLink>
+				</div>
+			</div>
+			@if (ChildContent is not null)
+			{
+				<div>
+					@ChildContent
+				</div>
+			}
+		</div>
+	</div>
+}

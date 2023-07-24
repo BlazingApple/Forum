@@ -21,13 +21,19 @@ public partial class PostCommentRow : ComponentBase
 
 	/// <summary><see cref="VoteStyle"/></summary>
 	[Parameter]
-	public VoteStyle? VoteStyle { get; set; } = Votes.VoteStyle.ReactionsOnly;
+	public VoteStyle VoteStyle { get; set; }
+
+	/// <summary><see cref="Comments.CommentStyle"/></summary>
+	[Parameter]
+	public CommentStyle CommentStyle { get; set; }
 
 	/// <summary>Rendered below the name, if present</summary>
 	[Parameter]
-	public RenderFragment? ChildContent { get; set; }
+	public RenderFragment? UserBadgeContent { get; set; }
 
-	private async Task ReplyClicked() => _replyOpen = !_replyOpen;
+	/// <summary>Rendered below the name, if present</summary>
+	[Parameter, EditorRequired]
+	public EventCallback<IPostComment> AfterCommentSubmitted { get; set; }
 
 	private void VoteChanged(VoteType? vote)
 	{
@@ -65,13 +71,21 @@ public partial class PostCommentRow : ComponentBase
 		}
 	}
 
-	private void AfterCommentSubmitted(IPostComment newComment)
+	private async Task AfterCommentSubmittedInternal(IPostComment newComment)
 	{
 		if(Comment is null)
 			throw new ArgumentNullException(nameof(Comment), "Unexpected null for comment.");
 
-		Comment.Children ??= new List<IPostComment>();
-		Comment.Children.Insert(0, newComment);
+		if(CommentStyle == Comments.CommentStyle.Hierarchy)
+		{
+			Comment.Children ??= new List<IPostComment>();
+			Comment.Children.Insert(0, newComment);
+		}
+		else if(AfterCommentSubmitted.HasDelegate)
+		{
+			await AfterCommentSubmitted.InvokeAsync(newComment);
+		}
+
 		_replyOpen = false;
 	}
 

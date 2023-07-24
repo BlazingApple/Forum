@@ -4,11 +4,21 @@
 	<Header>
 		@Community.Title
 	</Header>
+
+	@if(ChildContent is not null)
+	{
+		<div class="row">
+			<div class="col-lg-12">
+				@ChildContent
+			</div>
+		</div>
+	}
+
 	<div class="row">
 		<div class="col-lg-9">
 			@if(Posts is not null)
 			{
-				<PostList Posts="Posts" />
+				<PostList Posts="Posts" VoteStyle="VoteStyle" />
 			}
 		</div>
 		<div class="col-lg-3">

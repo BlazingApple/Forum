@@ -4,6 +4,16 @@
 	<Header>
 		@Forum.Title
 	</Header>
+
+	@if (ChildContent is not null)
+	{
+		<div class="row">
+			<div class="col-lg-12">
+				@ChildContent
+			</div>
+		</div>
+	}
+
 	<div class="row">
 		<div class="col-lg-9">
 			@if(Communities is not null)

@@ -1,0 +1,27 @@
+﻿@using BlazingApple.Components.Reactions
+@using BlazingApple.Forums.Components.Votes
+@using static BlazingApple.Forums.Components.Votes.VoteToggle;
+<div class="d-flex align-items-center">
+	@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
+	{
+		<div class="me-2 d-flex align-items-center">
+			<VoteToggle Direction="@VoteToggleDirection.Horizontal" Value="Vote" ValueChanged="OnVoteChanged" />
+		</div>
+	}
+						
+	@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+	{
+		<div class="me-2 d-flex align-items-center">
+			<ReactionButton Value="Reaction" ValueChanged="OnReactionChanged" Reactions="Reactions" />
+		</div>
+	}
+
+	<div class="me-2 d-flex align-items-center">
+		<button class="btn btn-link btn-sm p-0" type="button" style="line-height:0;" @onclick="OnReplyClicked">
+			<i class="fas fa-reply"></i> Reply
+		</button>
+	</div>
+	<div class="me-2 d-flex align-items-center">
+		<ShareButton UrlToShare="#" />
+	</div>
+</div>

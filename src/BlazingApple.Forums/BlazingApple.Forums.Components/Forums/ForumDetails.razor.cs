@@ -1,5 +1,5 @@
-﻿using BlazingApple.Forums.Shared.Models.Forums;
-using BlazingApple.Forums.Shared.Models.Communities;
+﻿using BlazingApple.Forums.Shared.Models.Communities;
+using BlazingApple.Forums.Shared.Models.Forums;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingApple.Forums.Components.Forums;
@@ -14,4 +14,8 @@ public partial class ForumDetails : ComponentBase
 	/// <summary>Forum details to render.</summary>
 	[Parameter, EditorRequired]
 	public IForum? Forum { get; set; }
+
+	/// <summary>Child content to render below the page header.</summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
 }

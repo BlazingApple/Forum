@@ -1,4 +1,5 @@
 ﻿using BlazingApple.Components.Shared.Interfaces;
+using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
 using Microsoft.AspNetCore.Components;
 
@@ -11,6 +12,14 @@ public partial class PostCommentList : ComponentBase
 	[Parameter, EditorRequired]
 	public List<IPostComment>? Comments { get; set; }
 
+	/// <summary><see cref="Comments.CommentStyle"/></summary>
+	[Parameter]
+	public CommentStyle CommentStyle { get; set; } = CommentStyle.Chronological;
+
+	/// <summary><see cref="VoteStyle"/></summary>
+	[Parameter]
+	public VoteStyle VoteStyle { get; set; } = VoteStyle.ReactionsOnly;
+
 	/// <inheritdoc />
 	protected override void OnInitialized()
 	{
@@ -20,18 +29,30 @@ public partial class PostCommentList : ComponentBase
 			Comments = SortComments(Comments);
 	}
 
-	private static List<IPostComment> SortComments(List<IPostComment> comments)
+	private List<IPostComment> SortComments(List<IPostComment> comments)
 	{
 		comments = comments.OrderByDescending(c => c.DatabaseCreationTimestamp).ToList();
 
-		foreach(IPostComment comment in comments)
+		if(CommentStyle is CommentStyle.Hierarchy)
 		{
-			if(comment.Children is null)
-				continue;
-			else
-				comment.Children = SortComments(comment.Children);
+			foreach(IPostComment comment in comments)
+			{
+				if(comment.Children is null)
+					continue;
+				else
+					comment.Children = SortComments(comment.Children);
+			}
 		}
 
 		return comments;
+	}
+
+	private void AfterCommentSubmitted(IPostComment postComment)
+	{
+		if(Comments is null)
+			throw new InvalidOperationException("Unexpected state");
+
+		Comments.Insert(0, postComment);
+		StateHasChanged();
 	}
 }

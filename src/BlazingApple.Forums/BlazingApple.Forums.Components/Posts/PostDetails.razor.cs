@@ -1,4 +1,5 @@
 ﻿using BlazingApple.Components.Shared.Models.Reactions;
+using BlazingApple.Forums.Components.Posts.Comments;
 using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Reactions;
@@ -19,7 +20,15 @@ public partial class PostDetails : ComponentBase
 
 	/// <summary><see cref="VoteStyle"/></summary>
 	[Parameter]
-	public VoteStyle? VoteStyle { get; set; } = Votes.VoteStyle.ReactionsOnly;
+	public VoteStyle VoteStyle { get; set; } = VoteStyle.ReactionsOnly;
+
+	/// <summary><see cref="VoteStyle"/></summary>
+	[Parameter]
+	public CommentStyle CommentStyle { get; set; } = CommentStyle.Chronological;
+
+	/// <summary>Child content to render below the page header.</summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
 
 	[Inject]
 	private IPostReactionService PostReactionService { get; set; } = null!;

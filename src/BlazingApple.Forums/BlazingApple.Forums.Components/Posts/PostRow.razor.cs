@@ -18,7 +18,7 @@ public partial class PostRow : ComponentBase
 
 	/// <summary><see cref="VoteStyle"/></summary>
 	[Parameter]
-	public VoteStyle? VoteStyle { get; set; } = Votes.VoteStyle.ReactionsOnly;
+	public VoteStyle VoteStyle { get; set; }
 
 	private void ReactionChanged(ReactionType? reaction)
 	{

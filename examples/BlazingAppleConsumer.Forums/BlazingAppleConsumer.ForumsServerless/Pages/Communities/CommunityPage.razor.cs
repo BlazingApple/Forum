@@ -1,4 +1,5 @@
-﻿using BlazingApple.Forums.Shared.Models.Base;
+﻿using BlazingApple.Forums.Components.Votes;
+using BlazingApple.Forums.Shared.Models.Base;
 using BlazingApple.Forums.Shared.Models.Communities;
 using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingAppleConsumer.ForumsServerless.Pages.Posts;
@@ -10,6 +11,7 @@ namespace BlazingAppleConsumer.ForumsServerless.Pages.Communities;
 public partial class CommunityPage : ComponentBase
 {
 	private IForumCommunity? _community;
+	private VoteStyle _voteStyle = VoteStyle.ReactionsOnly;
 
 	/// <summary><see cref="IForumSluggable"/></summary>
 	[Parameter, EditorRequired]

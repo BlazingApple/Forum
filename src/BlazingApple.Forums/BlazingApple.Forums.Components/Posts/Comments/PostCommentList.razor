@@ -1,7 +1,7 @@
 ﻿@if(Comments is not null) {
 	<RecordList Items="Comments" Context="comment">
 		<RowTemplate>
-			<PostCommentRow Comment="comment" />
+			<PostCommentRow Comment="comment" CommentStyle="CommentStyle" VoteStyle="VoteStyle" AfterCommentSubmitted="AfterCommentSubmitted" />
 		</RowTemplate>
 	</RecordList>
 }

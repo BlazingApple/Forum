@@ -1,4 +1,5 @@
-﻿using BlazingApple.Forums.Shared.Models.Communities;
+﻿using BlazingApple.Forums.Components.Votes;
+using BlazingApple.Forums.Shared.Models.Communities;
 using BlazingApple.Forums.Shared.Models.Posts;
 using Microsoft.AspNetCore.Components;
 
@@ -14,5 +15,13 @@ public partial class CommunityDetails : ComponentBase
 	/// <summary>Forum details to render.</summary>
 	[Parameter, EditorRequired]
 	public IForumCommunity? Community { get; set; }
+
+	/// <summary><see cref="VoteStyle"/></summary>
+	[Parameter]
+	public VoteStyle VoteStyle { get; set; } = VoteStyle.ReactionsOnly;
+
+	/// <summary>Child content to render below the page header.</summary>
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
 }
 

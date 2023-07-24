@@ -1,0 +1,21 @@
+﻿@if(Comment is not null) {
+	<div>
+		@((MarkupString)@Comment.Content)
+	</div>
+
+	<CommentOptions 
+		VoteStyle="VoteStyle" 
+		Vote="Vote" 
+		VoteChanged="VoteChanged" 
+		Reaction="Reaction" 
+		ReactionChanged="ReactionChanged" 
+		Reactions="Comment.GetReactionCounts()" 
+		ReplyClicked="ReplyOpenClicked" />
+
+	@if(ReplyOpen)
+	{
+		<div class="ms-2">
+			<AuthorPostComment UserId="abc" PostId="@Comment.PostId"  ParentCommentId="@Comment.Id" CommentSubmitted="AfterCommentSubmitted" />
+		</div>
+	}
+}

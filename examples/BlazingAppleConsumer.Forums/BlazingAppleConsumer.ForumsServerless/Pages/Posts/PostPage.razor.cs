@@ -1,4 +1,6 @@
 ﻿using BlazingApple.Components.Shared.Models.Reactions;
+using BlazingApple.Forums.Components.Posts.Comments;
+using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
@@ -11,6 +13,8 @@ namespace BlazingAppleConsumer.ForumsServerless.Pages.Posts;
 public partial class PostPage : ComponentBase
 {
 	private IPost? _post;
+	private VoteStyle _voteStyle = VoteStyle.ReactionsOnly;
+	private CommentStyle _commentStyle = CommentStyle.Chronological;
 
 	/// <summary></summary>
 	[Parameter, EditorRequired]

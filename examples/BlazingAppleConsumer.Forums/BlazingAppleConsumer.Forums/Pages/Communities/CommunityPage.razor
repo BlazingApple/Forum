@@ -1,8 +1,24 @@
 ﻿@page "/forums/t/{*Slug}"
+@using BlazingApple.Components.HTMLElements
+@using BlazingApple.Components.Shared.Models.Reactions;
+@using BlazingApple.Components;
 @using BlazingApple.Forums.Components.Posts
 @using BlazingApple.Forums.Components.Communities
+@using BlazingApple.Forums.Components.Votes;
+@using BlazingApple.Forums.Shared.Models.Votes;
 
 @if (_community is not null)
 {
-	<CommunityDetails Community="_community" Posts="_community.Posts"></CommunityDetails>
+	<CommunityDetails Community="_community" Posts="_community.Posts" VoteStyle="_voteStyle">
+		<p>This is a community page. This shows a collection of posts, the community's members, and the option to join or create a new post in the community.</p>
+		<p>
+			Options:
+			<div>
+				<label>Voting style</label>
+				<PillRadioGroup AdditionalClasses="small"  Name="voteStyle" @bind-Value="_voteStyle" Options="@(Enum.GetValues<VoteStyle>())">
+					<TemplatedContent Context="voteStyle">@voteStyle.GetEnumDisplayName()</TemplatedContent>
+				</PillRadioGroup>
+			</div>
+		</p>
+	</CommunityDetails>
 }

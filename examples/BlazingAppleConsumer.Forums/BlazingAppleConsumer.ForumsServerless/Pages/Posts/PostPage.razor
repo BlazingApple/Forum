@@ -1,7 +1,29 @@
 ﻿@page "/forums/p/{*Slug}"
 
+@using BlazingApple.Components;
 @using BlazingApple.Forums.Components.Posts
+@using BlazingApple.Forums.Components.Posts.Comments;
+@using BlazingApple.Forums.Components.Votes;
+@using BlazingApple.Components.HTMLElements
 
-@if(_post is not null) {
-	<PostDetails Post="_post"/>
+@if (_post is not null)
+{
+	<PostDetails Post="_post" VoteStyle="_voteStyle" CommentStyle="_commentStyle">
+		<p>This is a posts page. This shows the actual post, and comments from community's members.</p>
+		<p>
+			Options:
+			<div>
+				<label>Voting style</label>
+				<PillRadioGroup AdditionalClasses="small" Name="voteStyle" @bind-Value="_voteStyle" Options="@(Enum.GetValues<VoteStyle>())">
+					<TemplatedContent Context="voteStyle">@voteStyle.GetEnumDisplayName()</TemplatedContent>
+				</PillRadioGroup>
+			</div>
+			<div>
+				<label>Comment style</label>
+				<PillRadioGroup AdditionalClasses="small" Name="commentStyle" @bind-Value="_commentStyle" Options="@(Enum.GetValues<CommentStyle>())">
+					<TemplatedContent Context="commentStyle">@commentStyle.GetEnumDisplayName()</TemplatedContent>
+				</PillRadioGroup>
+			</div>
+		</p>
+	</PostDetails>
 }
