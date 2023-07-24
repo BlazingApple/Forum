@@ -12,7 +12,7 @@
 	@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
 	{
 		<div class="me-2 d-flex align-items-center">
-			<ReactionButton Value="Reaction" ValueChanged="OnReactionChanged" Reactions="Reactions" />
+			<ReactionButton AdditionalClasses="btn-sm" Value="Reaction" ValueChanged="OnReactionChanged" Reactions="Reactions" />
 		</div>
 	}
 

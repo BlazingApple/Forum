@@ -60,7 +60,7 @@
 								@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
 								{
 									<div class="me-2">
-										<ReactionButton Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />
+										<ReactionButton AdditionalClasses="btn-sm" Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />
 									</div>
 								}
 							}
