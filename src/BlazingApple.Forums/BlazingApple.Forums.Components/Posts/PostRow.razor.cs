@@ -1,7 +1,8 @@
 ﻿using BlazingApple.Components.Shared.Models.Reactions;
-using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Reactions;
+using BlazingApple.Forums.Shared.Models.Votes;
+using BlazingApple.Forums.Shared.Services.Posts;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingApple.Forums.Components.Posts;
@@ -10,7 +11,7 @@ namespace BlazingApple.Forums.Components.Posts;
 public partial class PostRow : ComponentBase
 {
 	private IPostReaction? _postReaction;
-	private readonly IDictionary<ReactionType, int>? _reactions;
+	private IDictionary<ReactionType, int>? _reactions;
 
 	/// <summary><see cref="IPost"/></summary>
 	[Parameter, EditorRequired]
@@ -20,21 +21,31 @@ public partial class PostRow : ComponentBase
 	[Parameter]
 	public VoteStyle VoteStyle { get; set; }
 
-	private void ReactionChanged(ReactionType? reaction)
+	[Inject]
+	public IPostReactionService ReactionService { get; set; } = null!;
+
+	private async Task ReactionChanged(ReactionType? reaction)
 	{
 		if(reaction == null)
 		{
+			if(_postReaction is not null)
+				await ReactionService.Delete(_postReaction.Id);
+
 			_postReaction = null;
 		}
 		else
 		{
 			_postReaction = new PostReaction()
 			{
+				Id = Guid.NewGuid(),
 				Type = reaction.Value,
 				UserId = "abc",
 				DatabaseCreationTimestamp = DateTime.Now,
 				PostId = Post!.Id
 			};
+
+			await ReactionService.Post(_postReaction);
+			_reactions = await ReactionService.GetReactionCount(_postReaction.PostId);
 		}
 	}
 }

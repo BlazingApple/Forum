@@ -10,6 +10,11 @@ public interface ICrudService<TModel> where TModel : class
 	/// <returns>An HttpResponseMessage indicating whether or not the request succeeded.</returns>
 	Task<bool> Delete(string internalSlug);
 
+	/// <summary>Deletes the record from the database</summary>
+	/// <param name="id">Delete via the id.</param>
+	/// <returns>An HttpResponseMessage indicating whether or not the request succeeded.</returns>
+	Task<bool> Delete(Guid id);
+
 	/// <summary>Retrieves a record from the database</summary>
 	/// <param name="internalSlug">The record's slug or identifier used to identify the record on the server.</param>
 	/// <returns>The deserialized object (if exists).</returns>

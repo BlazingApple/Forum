@@ -1,5 +1,5 @@
-﻿using BlazingApple.Forums.Components.Votes;
-using BlazingApple.Forums.Shared.Models.Posts;
+﻿using BlazingApple.Forums.Shared.Models.Posts;
+using BlazingApple.Forums.Shared.Models.Votes;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingApple.Forums.Components.Posts;

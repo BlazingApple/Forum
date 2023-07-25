@@ -1,9 +1,9 @@
 ﻿using BlazingApple.Components.Shared.Models.Reactions;
-using BlazingApple.Forums.Components.Posts.Comments;
-using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
+using BlazingApple.Forums.Shared.Posts.Comments;
+using BlazingApple.Forums.Shared.Services.Comments;
 using BlazingAppleConsumer.Forums.Pages.Forums;
 using Microsoft.AspNetCore.Components;
 
@@ -20,50 +20,28 @@ public partial class PostPage : ComponentBase
 	[Parameter, EditorRequired]
 	public string Slug { get; set; } = null!;
 
+	[Inject]
+	private ICommentService CommentService { get; set; } = null!;
+
 	/// <inheritdoc />
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 		string forumSlug = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+		Guid postId = Guid.NewGuid();
+		List<IPostComment> comments = await CommentService.GetCommentsForPost(postId, _commentStyle);
 
 		_post = new Post
 		{
+			Id = postId,
 			Slug = Slug,
 			Title = "Hello word",
 			Content = "I like eggs",
 			UserId = "abc",
 			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(90)),
-			Comments = GetComments(),
+			Comments = comments,
 			Community = ForumPage.GetCommunity(forumSlug, "Levels of heat", "Discussing what it means to be 'Blazing'."),
 			Reactions = GetReactions(),
-		};
-	}
-
-	private static List<IPostComment> GetComments() => GetCommentsCore().ToList();
-
-	private static IEnumerable<IPostComment> GetCommentsCore()
-	{
-		int commentCount = Random.Shared.Next(0, 3);
-
-		for(int i = 0; i < commentCount; i++)
-		{
-			yield return GetComment();
-		}
-	}
-
-	private static IPostComment GetComment()
-	{
-		DateTime dateTime = DateTime.Now.AddMinutes(-1 * Random.Shared.Next(0, 2500));
-		return new PostComment()
-		{
-			Id = Guid.NewGuid(),
-			Content = "Lorem Ipsum",
-			UserId = "abc",
-			DatabaseCreationTimestamp = dateTime,
-			DatabaseModificationTimestamp = dateTime,
-			Votes = new List<ICommentVote>(),
-			Children = GetComments(),
-			Reactions = GetCommentReactions(),
 		};
 	}
 

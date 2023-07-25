@@ -1,10 +1,12 @@
 ﻿@using BlazingApple.Components.Reactions
 @using BlazingApple.Forums.Components.Shared
 @using BlazingApple.Forums.Components.Votes
+@using BlazingApple.Forums.Shared.Models.Votes
+
 @if (Post is not null) {
 	<Card Title="@Post.Title" TitleUrl="@(ForumPageRoutes.PostDetails(Post.Slug))">
 		<div class="d-flex">
-			@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
+			@if (VoteStyle is VoteStyle.VotesOnly or VoteStyle.ReactionsAndVotes) 
 			{
 				<div class="me-4">
 					<PostVoteDisplay Post="Post"></PostVoteDisplay>
@@ -17,7 +19,7 @@
 						<i class="fas fa-comments"></i> @Random.Shared.Next(100) Comments
 					</BrowserLink>
 
-					@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+					@if (VoteStyle is VoteStyle.ReactionsOnly or VoteStyle.ReactionsAndVotes) 
 					{
 						<div class="me-2">
 							<ReactionButton AdditionalClasses="btn-sm" Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />

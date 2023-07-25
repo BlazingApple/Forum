@@ -1,15 +1,17 @@
 ﻿@using BlazingApple.Components.Reactions
 @using BlazingApple.Forums.Components.Votes
+@using BlazingApple.Forums.Shared.Models.Votes
+
 @using static BlazingApple.Forums.Components.Votes.VoteToggle;
 <div class="d-flex align-items-center">
-	@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
+	@if (VoteStyle is VoteStyle.VotesOnly or VoteStyle.ReactionsAndVotes) 
 	{
 		<div class="me-2 d-flex align-items-center">
 			<VoteToggle Direction="@VoteToggleDirection.Horizontal" Value="Vote" ValueChanged="OnVoteChanged" />
 		</div>
 	}
 						
-	@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+	@if (VoteStyle is VoteStyle.ReactionsOnly or VoteStyle.ReactionsAndVotes) 
 	{
 		<div class="me-2 d-flex align-items-center">
 			<ReactionButton AdditionalClasses="btn-sm" Value="Reaction" ValueChanged="OnReactionChanged" Reactions="Reactions" />

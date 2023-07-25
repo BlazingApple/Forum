@@ -1,4 +1,4 @@
-﻿namespace BlazingApple.Forums.Components.Posts.Comments;
+﻿namespace BlazingApple.Forums.Shared.Posts.Comments;
 
 /// <summary>Indicates whether the comment style should use a hierarchy, like Reddit, or replies, like MS Teams (or many other messaging apps)</summary>
 public enum CommentStyle

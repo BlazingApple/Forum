@@ -3,85 +3,92 @@
 @using BlazingApple.Forums.Components.Shared
 @using BlazingApple.Forums.Components.Votes
 @using BlazingApple.Forums.Components.Communities
+@using BlazingApple.Forums.Shared.Models.Votes
+
 @if (Post is not null)
 {
-	<div class="row">
-		<div class="col-lg-8">
-			<div class="d-flex">
-				@if (VoteStyle is Votes.VoteStyle.VotesOnly or Votes.VoteStyle.ReactionsAndVotes) 
-				{
-					<div class="me-2">
-						<PostVoteDisplay Post="Post"/>
-					</div>
-				}
-				<div style="width: 100%; overflow: auto;">
-					<div class="d-flex flex-column">
-						<h2>@Post.Title</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="d-flex">
+					@if (VoteStyle is VoteStyle.VotesOnly or VoteStyle.ReactionsAndVotes) 
+					{
+						<div class="me-2">
+							<PostVoteDisplay Post="Post"/>
+						</div>
+					}
+					<div style="width: 100%; overflow: auto;">
+						<div class="d-flex flex-column">
+							<h2>@Post.Title</h2>
 
-						@if (ChildContent is not null)
-						{
-							<div class="row">
-								<div class="col-lg-12">
+							@if (ChildContent is not null)
+							{
+								<div>
 									@ChildContent
 								</div>
-							</div>
-						}
-						<div>
-							@if(Post.Community is not null)
-							{
-								<small class="me-2">
-									<a href="@ForumPageRoutes.CommunityDetails(@Post.Community.Slug)">
-										@Post.Community.Title
-									</a>
-								</small>
 							}
+							<div>
+								@if(Post.Community is not null)
+								{
+									<small class="me-2">
+										<a href="@ForumPageRoutes.CommunityDetails(@Post.Community.Slug)">
+											@Post.Community.Title
+										</a>
+									</small>
+								}
 
-							<small class="text-muted">
-								<span>
-									Posted by
-								</span>
-								<a href="#">
-									@Post.UserId
-								</a>
-								<span title="@Post.DatabaseCreationTimestamp.ToLongDateString()"> @Post.ToCreationDate()</span>
-							</small>
-						</div>
-						<div>
-							@Post.Content
-						</div>
-						<div class="d-flex align-items-center">
-							@* horizontal buttons go here *@
+								<small class="text-muted">
+									<span>
+										Posted by
+									</span>
+									<a href="#">
+										@Post.UserId
+									</a>
+									<span title="@Post.DatabaseCreationTimestamp.ToLongDateString()"> @Post.ToCreationDate()</span>
+								</small>
+							</div>
+							<div>
+								@Post.Content
+							</div>
+							<div class="d-flex align-items-center">
+								@* horizontal buttons go here *@
 					
-							@if(Post.Community is not null)
-							{
-								<div class="me-2">
-									<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Community.Slug)"/>
-								</div>
-								@if (VoteStyle is Votes.VoteStyle.ReactionsOnly or Votes.VoteStyle.ReactionsAndVotes) 
+								@if(Post.Community is not null)
 								{
 									<div class="me-2">
-										<ReactionButton AdditionalClasses="btn-sm" Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />
+										<ShareButton UrlToShare="@ForumPageRoutes.PostDetails(Post.Community.Slug)"/>
 									</div>
+									@if (VoteStyle is VoteStyle.ReactionsOnly or VoteStyle.ReactionsAndVotes) 
+									{
+										<div class="me-2">
+											<ReactionButton AdditionalClasses="btn-sm" Value="_postReaction?.Type" ValueChanged="ReactionChanged" Reactions="_reactions" />
+										</div>
+									}
 								}
-							}
-						</div>
-						<div class="my-3">
-							<AuthorPostComment UserId="abc" PostId="@Post.Id" CommentSubmitted="AfterCommentSubmitted" />
-						</div>
-						<hr />
-						<div>
-							<h4>Comments</h4>
-							<PostCommentList Comments="@Post.Comments" CommentStyle="@CommentStyle" VoteStyle="VoteStyle" />
+							</div>
+							<div class="my-3">
+								<AuthorPostComment UserId="abc" PostId="@Post.Id" CommentSubmitted="AfterCommentSubmitted" />
+							</div>
+							<hr />
+							<div>
+								<div class="d-flex align-items-center">
+									<h4 class="mb-0">Comments</h4>
+									<button type="button" class="btn btn-light btn-sm ms-2" style="border-radius:50%;" @onclick="RefreshComments">
+										<i class="fas fa-sync-alt"></i>
+									</button>
+								</div>
+								<PostCommentList Comments="@Post.Comments" CommentStyle="@CommentStyle" VoteStyle="VoteStyle" />
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-4">
-			<div class="sticky-top">
-				@if(Post.Community is not null) {
-					<AboutCommunity Community="@Post.Community"/>
-				}
+			<div class="col-lg-4">
+				<div class="sticky-top">
+					@if(Post.Community is not null) {
+						<AboutCommunity Community="@Post.Community"/>
+					}
+				</div>
 			</div>
 		</div>
 	</div>

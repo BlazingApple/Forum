@@ -6,13 +6,10 @@ using BlazingApple.Forums.Shared.Models.Votes;
 
 namespace BlazingApple.Forums.Shared.Models.Posts;
 
-public partial interface IPostComment : IChangeTracked
+public partial interface IPostComment : IForumRecord
 {
 	/// <summary>The string content of the comment.</summary>   
 	string Content { get; set; }
-
-	/// <summary>Id for comment.</summary>
-	Guid Id { get; set; }
 
 	/// <summary>Author users id</summary>
 	string UserId { get; set; }

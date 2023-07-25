@@ -3,8 +3,9 @@
 @using BlazingApple.Components;
 @using BlazingApple.Forums.Components.Posts
 @using BlazingApple.Forums.Components.Posts.Comments;
-@using BlazingApple.Forums.Components.Votes;
 @using BlazingApple.Components.HTMLElements
+@using BlazingApple.Forums.Shared.Models.Votes;
+@using BlazingApple.Forums.Shared.Posts.Comments;
 
 @if(_post is not null) {
 	<PostDetails Post="_post" VoteStyle="_voteStyle" CommentStyle="_commentStyle">

@@ -1,7 +1,7 @@
-﻿using BlazingApple.Forums.Components.Votes;
-using BlazingApple.Forums.Shared.Models.Base;
+﻿using BlazingApple.Forums.Shared.Models.Base;
 using BlazingApple.Forums.Shared.Models.Communities;
 using BlazingApple.Forums.Shared.Models.Posts;
+using BlazingApple.Forums.Shared.Models.Votes;
 using BlazingAppleConsumer.ForumsServerless.Pages.Posts;
 using Microsoft.AspNetCore.Components;
 
@@ -25,6 +25,7 @@ public partial class CommunityPage : ComponentBase
 			Title = "Blazing Heat",
 			Slug = Slug,
 			CreatingUserId = "abc",
+			DatabaseCreationTimestamp = DateTime.UtcNow.AddDays(Random.Shared.Next(0, 1000)),
 			Description = "All about hot sauce",
 			ForumId = Guid.NewGuid(),
 			Posts = new List<IPost>()

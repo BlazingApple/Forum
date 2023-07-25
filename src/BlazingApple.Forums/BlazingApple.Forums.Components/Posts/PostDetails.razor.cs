@@ -1,8 +1,9 @@
 ﻿using BlazingApple.Components.Shared.Models.Reactions;
-using BlazingApple.Forums.Components.Posts.Comments;
-using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Reactions;
+using BlazingApple.Forums.Shared.Models.Votes;
+using BlazingApple.Forums.Shared.Posts.Comments;
+using BlazingApple.Forums.Shared.Services.Comments;
 using BlazingApple.Forums.Shared.Services.Posts;
 using Microsoft.AspNetCore.Components;
 
@@ -13,6 +14,8 @@ public partial class PostDetails : ComponentBase
 {
 	private IPostReaction? _postReaction;
 	private IDictionary<ReactionType, int>? _reactions;
+	private IList<IPostComment>? _comments;
+	private IPost? _lastPost;
 
 	/// <summary><see cref="IPost"/></summary>
 	[Parameter, EditorRequired]
@@ -31,7 +34,10 @@ public partial class PostDetails : ComponentBase
 	public RenderFragment? ChildContent { get; set; }
 
 	[Inject]
-	private IPostReactionService PostReactionService { get; set; } = null!;
+	private IPostReactionService ReactionService { get; set; } = null!;
+
+	[Inject]
+	private ICommentService CommentsService { get; set; } = null!;
 
 	private void AfterCommentSubmitted(IPostComment newComment)
 	{
@@ -46,15 +52,34 @@ public partial class PostDetails : ComponentBase
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
+		_lastPost = Post;
 
 		if(Post is not null)
-			_reactions = await PostReactionService.GetReactionCount(Post.Id);
+			await InitializePostData();
 	}
 
-	private void ReactionChanged(ReactionType? reaction)
+	/// <inheritdoc />
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if(Post != _lastPost && Post is not null)
+			await InitializePostData();
+	}
+
+	private async Task InitializePostData()
+	{
+		_reactions = await ReactionService.GetReactionCount(Post!.Id);
+		_comments = await CommentsService.GetCommentsForPost(Post.Id, CommentStyle);
+	}
+
+	private async Task ReactionChanged(ReactionType? reaction)
 	{
 		if(reaction == null)
 		{
+			if(_postReaction is not null)
+				await ReactionService.Delete(_postReaction.Id);
+
 			_postReaction = null;
 		}
 		else
@@ -66,6 +91,17 @@ public partial class PostDetails : ComponentBase
 				DatabaseCreationTimestamp = DateTime.Now,
 				PostId = Post!.Id
 			};
+
+			await ReactionService.Post(_postReaction);
+			_reactions = await ReactionService.GetReactionCount(_postReaction.PostId);
 		}
+	}
+
+	private async Task RefreshComments()
+	{
+		if(Post is null)
+			return;
+
+		Post.Comments = await CommentsService.GetCommentsForPost(Post.Id, CommentStyle);
 	}
 }

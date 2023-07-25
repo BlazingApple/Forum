@@ -35,6 +35,14 @@ internal class CrudHttpServiceBase<TModel> : ICrudService<TModel>
 	}
 
 	/// <inheritdoc/>
+	public virtual async Task<bool> Delete(Guid id)
+	{
+		HttpResponseMessage response = await Http.DeleteAsync(ApiPrefix + id);
+
+		return response.IsSuccessStatusCode;
+	}
+
+	/// <inheritdoc/>
 	public virtual async Task<TModel> Get(string slug)
 		=> (await Http.GetFromJsonAsync<TModel>(ApiPrefix + slug))!;
 

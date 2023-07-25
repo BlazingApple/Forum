@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlazingApple.Forums.Components.Votes;
+namespace BlazingApple.Forums.Shared.Models.Votes;
 
 /// <summary>Describes the type of reactions to display.</summary>
 public enum VoteStyle

@@ -1,7 +1,9 @@
 ﻿using BlazingApple.Components.Shared.Models.Reactions;
-using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
+using BlazingApple.Forums.Shared.Models.Reactions;
 using BlazingApple.Forums.Shared.Models.Votes;
+using BlazingApple.Forums.Shared.Posts.Comments;
+using BlazingApple.Forums.Shared.Services.Comments;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingApple.Forums.Components.Posts.Comments;
@@ -9,6 +11,10 @@ namespace BlazingApple.Forums.Components.Posts.Comments;
 /// <summary>Renders the <em>actual</em> comment body content and the options associated with it.</summary>
 public partial class CommentBody : ComponentBase
 {
+	private ICommentVote? _commentVote;
+	private ICommentReaction? _commentReaction;
+	private IDictionary<ReactionType, int>? _reactions;
+
 	/// <summary><see cref="IPostComment"/></summary>
 	[Parameter, EditorRequired]
 	public IPostComment? Comment { get; set; }
@@ -19,15 +25,11 @@ public partial class CommentBody : ComponentBase
 	[Parameter]
 	public VoteType? Vote { get; set; }
 
-	/// <summary>Triggered when the current user selects a <see cref="VoteType"/> value.</summary>
-	[Parameter]
-	public EventCallback<VoteType?> VoteChanged { get; set; }
-
 	/// <summary><see cref="VoteStyle"/></summary>
 	[Parameter]
 	public VoteStyle VoteStyle { get; set; }
 
-	/// <summary><see cref="Comments.CommentStyle"/></summary>
+	/// <summary><see cref="CommentStyle"/></summary>
 	[Parameter]
 	public CommentStyle CommentStyle { get; set; }
 
@@ -36,10 +38,6 @@ public partial class CommentBody : ComponentBase
 	/// </summary>
 	[Parameter]
 	public ReactionType? Reaction { get; set; }
-
-	/// <summary>Triggered when the current user selects a reaction value.</summary>
-	[Parameter]
-	public EventCallback<ReactionType?> ReactionChanged { get; set; }
 
 	/// <summary>Triggered after the current user posts a new comment.</summary>
 	[Parameter, EditorRequired]
@@ -53,10 +51,67 @@ public partial class CommentBody : ComponentBase
 	[Parameter]
 	public EventCallback<bool> ReplyOpenChanged { get; set; }
 
+	[Inject]
+	private ICommentReactionService ReactionService { get; set; } = null!;
+
+	/// <inheritdoc />
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+		VoteChanged(Vote);
+		await ReactionChanged(Reaction);
+
+		if(Comment is not null)
+			_reactions ??= Comment.GetReactionCounts();
+	}
+
 	private async Task ReplyOpenClicked()
 	{
 		ReplyOpen = !ReplyOpen;
 		if(ReplyOpenChanged.HasDelegate)
 			await ReplyOpenChanged.InvokeAsync(ReplyOpen);
+	}
+
+	private async Task ReactionChanged(ReactionType? reaction)
+	{
+		if(reaction == null)
+		{
+			if(_commentReaction is not null)
+				await ReactionService.Delete(_commentReaction.Id);
+
+			_commentReaction = null;
+		}
+		else
+		{
+			_commentReaction = new CommentReaction()
+			{
+				Id = Guid.NewGuid(),
+				Type = reaction.Value,
+				UserId = "abc",
+				DatabaseCreationTimestamp = DateTime.Now,
+				CommentId = Comment!.Id
+			};
+
+			await ReactionService.Post(_commentReaction);
+			_reactions = await ReactionService.GetReactionCount(_commentReaction.CommentId);
+		}
+	}
+	private void VoteChanged(VoteType? vote)
+	{
+		if(vote == null)
+		{
+			_commentVote = null;
+		}
+		else
+		{
+			_commentVote = new CommentVote()
+			{
+				Id = Guid.NewGuid(),
+				Type = vote.Value,
+				UserId = "abc",
+				DatabaseCreationTimestamp = DateTime.Now,
+				CommentId = Comment!.Id
+			};
+		}
 	}
 }

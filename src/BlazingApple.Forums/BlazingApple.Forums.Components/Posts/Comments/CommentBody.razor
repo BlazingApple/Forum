@@ -5,11 +5,11 @@
 
 	<CommentOptions 
 		VoteStyle="VoteStyle" 
-		Vote="Vote" 
+		Vote="_commentVote?.Type" 
 		VoteChanged="VoteChanged" 
-		Reaction="Reaction" 
+		Reaction="_commentReaction?.Type" 
 		ReactionChanged="ReactionChanged" 
-		Reactions="Comment.GetReactionCounts()" 
+		Reactions="_reactions" 
 		ReplyClicked="ReplyOpenClicked" />
 
 	@if(ReplyOpen)

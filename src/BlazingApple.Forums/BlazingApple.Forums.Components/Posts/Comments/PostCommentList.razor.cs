@@ -1,6 +1,7 @@
 ﻿using BlazingApple.Components.Shared.Interfaces;
-using BlazingApple.Forums.Components.Votes;
 using BlazingApple.Forums.Shared.Models.Posts;
+using BlazingApple.Forums.Shared.Models.Votes;
+using BlazingApple.Forums.Shared.Posts.Comments;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazingApple.Forums.Components.Posts.Comments;
@@ -12,7 +13,7 @@ public partial class PostCommentList : ComponentBase
 	[Parameter, EditorRequired]
 	public List<IPostComment>? Comments { get; set; }
 
-	/// <summary><see cref="Comments.CommentStyle"/></summary>
+	/// <summary><see cref="CommentStyle"/></summary>
 	[Parameter]
 	public CommentStyle CommentStyle { get; set; } = CommentStyle.Chronological;
 
