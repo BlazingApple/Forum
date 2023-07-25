@@ -12,7 +12,7 @@ public partial class PostRow : ComponentBase
 {
 	private IPostReaction? _postReaction;
 	private IDictionary<ReactionType, int>? _reactions;
-
+	private IPost? _lastPost;
 	/// <summary><see cref="IPost"/></summary>
 	[Parameter, EditorRequired]
 	public IPost? Post { get; set; }
@@ -24,16 +24,46 @@ public partial class PostRow : ComponentBase
 	[Inject]
 	public IPostReactionService ReactionService { get; set; } = null!;
 
+	/// <inheritdoc />
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+		_lastPost = Post;
+		await InitializePost();
+	}
+
+	/// <inheritdoc />
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+		if(Post != _lastPost)
+		{
+			Post = _lastPost;
+			await InitializePost();
+		}
+	}
+
+	private async Task InitializePost()
+	{
+		if(Post is null)
+			return;
+
+		_reactions = await ReactionService.GetReactionCount(Post.Id);
+		_postReaction = null; // TODO
+	}
+
 	private async Task ReactionChanged(ReactionType? reaction)
 	{
-		if(reaction == null)
-		{
-			if(_postReaction is not null)
-				await ReactionService.Delete(_postReaction.Id);
 
-			_postReaction = null;
+		if(_postReaction is not null)
+		{
+			bool success = await ReactionService.Delete(_postReaction.Id);
+
+			if(success)
+				_postReaction = null;
 		}
-		else
+
+		if(reaction is not null)
 		{
 			_postReaction = new PostReaction()
 			{

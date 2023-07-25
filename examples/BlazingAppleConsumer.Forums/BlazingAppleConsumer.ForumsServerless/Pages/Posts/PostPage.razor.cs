@@ -38,9 +38,7 @@ public partial class PostPage : ComponentBase
 			Content = "I like eggs",
 			UserId = "abc",
 			DatabaseCreationTimestamp = DateTime.Now.AddDays(-1 * Random.Shared.Next(90)),
-			Comments = comments,
 			Community = ForumPage.GetThread(forumSlug, "Levels of heat", "Discussing what it means to be 'Blazing'."),
-			Reactions = GetReactions(),
 		};
 	}
 

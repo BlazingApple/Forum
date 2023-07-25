@@ -77,7 +77,11 @@
 										<i class="fas fa-sync-alt"></i>
 									</button>
 								</div>
-								<PostCommentList Comments="@Post.Comments" CommentStyle="@CommentStyle" VoteStyle="VoteStyle" />
+
+								@if(_comments is not null)
+								{
+									<PostCommentList Comments="_comments" CommentStyle="@CommentStyle" VoteStyle="VoteStyle" />
+								}
 							</div>
 						</div>
 					</div>

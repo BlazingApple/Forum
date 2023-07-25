@@ -30,6 +30,15 @@ public partial class PostCommentList : ComponentBase
 			Comments = SortComments(Comments);
 	}
 
+	/// <inheritdoc />
+	protected override void OnParametersSet()
+	{
+		base.OnParametersSet();
+
+		if(Comments is not null)
+			Comments = SortComments(Comments);
+	}
+
 	private List<IPostComment> SortComments(List<IPostComment> comments)
 	{
 		comments = comments.OrderByDescending(c => c.DatabaseCreationTimestamp).ToList();

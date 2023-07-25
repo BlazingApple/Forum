@@ -13,6 +13,23 @@ internal class FakePostReactionService : FakeCrudServiceBase<IPostReaction>, IPo
 	{
 	}
 
+	/// <inheritdoc />
+	public override async Task<bool> Delete(Guid id)
+	{
+		if(EntitiesById.TryGetValue(id, out IPostReaction? model))
+		{
+
+			if(_reactionsByPostId.ContainsKey(model.PostId))
+			{
+				IDictionary<ReactionType, int> reactions = _reactionsByPostId[model.PostId];
+				if(reactions.ContainsKey(model.Type))
+					reactions[model.Type]--;
+			}
+		}
+
+		return await base.Delete(id);
+	}
+
 	/// <inheritdoc/>
 	public async Task<IDictionary<ReactionType, int>> GetReactionCount(Guid postId)
 	{
@@ -41,8 +58,8 @@ internal class FakePostReactionService : FakeCrudServiceBase<IPostReaction>, IPo
 		if(model.Id == Guid.Empty)
 			model.Id = Guid.NewGuid();
 
-		if(_reactionsByPostId.ContainsKey(model.Id))
-			reactions = _reactionsByPostId[model.Id];
+		if(_reactionsByPostId.ContainsKey(model.PostId))
+			reactions = _reactionsByPostId[model.PostId];
 		else
 			reactions = new Dictionary<ReactionType, int>();
 

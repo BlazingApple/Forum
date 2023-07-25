@@ -1,6 +1,4 @@
-﻿using BlazingApple.Components.Shared.Models.Reactions;
-using BlazingApple.Forums.Shared.Models.Posts;
-using BlazingApple.Forums.Shared.Models.Reactions;
+﻿using BlazingApple.Forums.Shared.Models.Posts;
 using BlazingApple.Forums.Shared.Models.Votes;
 using BlazingApple.Forums.Shared.Posts.Comments;
 using BlazingApple.Forums.Shared.Services.Base;
@@ -12,6 +10,10 @@ namespace BlazingApple.Forums.Shared.Services;
 internal class FakeCommentService : FakeCrudServiceBase<IPostComment>, ICommentService
 {
 	private readonly IDictionary<Guid, List<IPostComment>> _commentsByPostId = new Dictionary<Guid, List<IPostComment>>();
+	private readonly ICommentReactionService _reactionService;
+
+	public FakeCommentService(ICommentReactionService reactionService)
+		=> _reactionService = reactionService;
 
 	/// <inheritdoc />
 	public override async Task<IPostComment> Get(string internalSlug)
@@ -103,38 +105,17 @@ internal class FakeCommentService : FakeCrudServiceBase<IPostComment>, ICommentS
 		DateTime dateTime = DateTime.Now.AddMinutes(-1 * Random.Shared.Next(0, 2500));
 		PostComment newComment = new()
 		{
+			Id = Guid.NewGuid(),
 			Content = "Lorem Ipsum",
 			UserId = "abc",
 			DatabaseCreationTimestamp = dateTime,
 			DatabaseModificationTimestamp = dateTime,
 			Votes = new List<ICommentVote>(),
 			Children = totalComments <= 50 ? GetComments() : new List<IPostComment>(),
-			Reactions = GetCommentReactions(),
 		};
 
 		totalComments += newComment.Children.Count;
 
 		return newComment;
-	}
-
-	public static List<ICommentReaction> GetCommentReactions()
-	{
-		List<ICommentReaction> reactions = new();
-		int reactionCount = Random.Shared.Next(0, 50);
-		int reactionOptions = Enum.GetValues<ReactionType>().Length;
-		for(int i = 0; i < reactionCount; i++)
-		{
-			ICommentReaction reaction = new CommentReaction()
-			{
-				Type = Enum.GetValues<ReactionType>()[Random.Shared.Next(0, reactionOptions - 1)],
-				DatabaseCreationTimestamp = DateTime.Now.AddDays(-12),
-				UserId = "abc",
-				CommentId = Guid.NewGuid(),
-			};
-
-			reactions.Add(reaction);
-		}
-
-		return reactions;
 	}
 }

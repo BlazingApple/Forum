@@ -15,6 +15,8 @@ public partial class CommentBody : ComponentBase
 	private ICommentReaction? _commentReaction;
 	private IDictionary<ReactionType, int>? _reactions;
 
+	private IPostComment? _lastComment;
+
 	/// <summary><see cref="IPostComment"/></summary>
 	[Parameter, EditorRequired]
 	public IPostComment? Comment { get; set; }
@@ -58,11 +60,29 @@ public partial class CommentBody : ComponentBase
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
+		_lastComment = Comment;
+
+		await InitializeComment();
+	}
+
+	/// <inheritdoc />
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		if(_lastComment != Comment)
+			await InitializeComment();
+	}
+
+	private async Task InitializeComment()
+	{
+		_commentVote = null;
+
 		VoteChanged(Vote);
 		await ReactionChanged(Reaction);
 
 		if(Comment is not null)
-			_reactions ??= Comment.GetReactionCounts();
+			_reactions ??= Comment.GetReactionCounts() ?? await ReactionService.GetReactionCount(Comment.Id);
 	}
 
 	private async Task ReplyOpenClicked()
@@ -74,14 +94,15 @@ public partial class CommentBody : ComponentBase
 
 	private async Task ReactionChanged(ReactionType? reaction)
 	{
-		if(reaction == null)
+		if(_commentReaction is not null)
 		{
-			if(_commentReaction is not null)
-				await ReactionService.Delete(_commentReaction.Id);
+			bool success = await ReactionService.Delete(_commentReaction.Id);
 
-			_commentReaction = null;
+			if(success)
+				_commentReaction = null;
 		}
-		else
+
+		if(reaction is not null)
 		{
 			_commentReaction = new CommentReaction()
 			{

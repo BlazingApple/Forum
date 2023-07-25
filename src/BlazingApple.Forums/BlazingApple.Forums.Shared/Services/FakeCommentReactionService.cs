@@ -11,6 +11,23 @@ internal class FakeCommentReactionService : FakeCrudServiceBase<ICommentReaction
 	{
 	}
 
+	/// <inheritdoc />
+	public override async Task<bool> Delete(Guid id)
+	{
+		if(EntitiesById.TryGetValue(id, out ICommentReaction? model))
+		{
+
+			if(_reactionsByCommentId.ContainsKey(model.CommentId))
+			{
+				IDictionary<ReactionType, int> reactions = _reactionsByCommentId[model.CommentId];
+				if(reactions.ContainsKey(model.Type))
+					reactions[model.Type]--;
+			}
+		}
+
+		return await base.Delete(id);
+	}
+
 	/// <inheritdoc/>
 	public async Task<IDictionary<ReactionType, int>> GetReactionCount(Guid commentId)
 	{
@@ -39,10 +56,15 @@ internal class FakeCommentReactionService : FakeCrudServiceBase<ICommentReaction
 		if(model.Id == Guid.Empty)
 			model.Id = Guid.NewGuid();
 
-		if(_reactionsByCommentId.ContainsKey(model.Id))
-			reactions = _reactionsByCommentId[model.Id];
+		if(_reactionsByCommentId.ContainsKey(model.CommentId))
+		{
+			reactions = _reactionsByCommentId[model.CommentId];
+		}
 		else
+		{
 			reactions = new Dictionary<ReactionType, int>();
+			_reactionsByCommentId.Add(model.CommentId, reactions);
+		}
 
 		ReactionType reactionType = model.Type;
 		if(reactions.ContainsKey(reactionType))

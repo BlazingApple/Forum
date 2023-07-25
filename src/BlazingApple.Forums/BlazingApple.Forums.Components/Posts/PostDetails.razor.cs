@@ -14,7 +14,7 @@ public partial class PostDetails : ComponentBase
 {
 	private IPostReaction? _postReaction;
 	private IDictionary<ReactionType, int>? _reactions;
-	private IList<IPostComment>? _comments;
+	private List<IPostComment>? _comments;
 	private IPost? _lastPost;
 
 	/// <summary><see cref="IPost"/></summary>
@@ -70,19 +70,21 @@ public partial class PostDetails : ComponentBase
 	private async Task InitializePostData()
 	{
 		_reactions = await ReactionService.GetReactionCount(Post!.Id);
-		_comments = await CommentsService.GetCommentsForPost(Post.Id, CommentStyle);
+		_comments = Post.Comments ?? await CommentsService.GetCommentsForPost(Post.Id, CommentStyle);
 	}
 
 	private async Task ReactionChanged(ReactionType? reaction)
 	{
-		if(reaction == null)
-		{
-			if(_postReaction is not null)
-				await ReactionService.Delete(_postReaction.Id);
 
-			_postReaction = null;
+		if(_postReaction is not null)
+		{
+			bool success = await ReactionService.Delete(_postReaction.Id);
+
+			if(success)
+				_postReaction = null;
 		}
-		else
+
+		if(reaction != null)
 		{
 			_postReaction = new PostReaction()
 			{
