@@ -7,12 +7,12 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "BlazingApple.Components.dll": "sha256-9NuNSOptB7+2eStMGzJYuKHwcisfP5QNOzQYMq2A4gM=",
+      "BlazingApple.Components.dll": "sha256-DItPDkhlx5BF2DNHYUN1+Wzs8x+aPD59m4Gp0R14g7M=",
       "BlazingApple.Components.Shared.dll": "sha256-IjhuvMWKP6ae8zXtpjQO\/1VOCUdoOCAAsw6i0O845QY=",
       "BlazingApple.FontAwesome.dll": "sha256-ApbZA3tH05mQMmHkTaGaqA7J3bkSfsR\/rHt+J\/iTqEk=",
-      "BlazingApple.Forums.Components.dll": "sha256-\/pfBRWJ6zWQ+PNUN6cM2htcnZ2dOrbFXVhayIIlylq4=",
-      "BlazingApple.Forums.Shared.dll": "sha256-UG3X5\/C2TMiHdWDyW6A9tyvlx51JZqJXoJYq8ocHBso=",
-      "BlazingAppleConsumer.ForumsServerless.dll": "sha256-bFCOV+d+HGtjOTXpeRUtkg8nwjQBUk21t1fdXzyRZVI=",
+      "BlazingApple.Forums.Components.dll": "sha256-LQIPbKD950Ln3Mr3PPsnCETEaIfq1r2MKcdqbaDNwb4=",
+      "BlazingApple.Forums.Shared.dll": "sha256-ZkPi4YOvxc4ox+lTFU8kRWyqdQ4x7jlti\/ZlaF9sb+A=",
+      "BlazingAppleConsumer.ForumsServerless.dll": "sha256-vIQquGLUwoxXLlYxzAZVksD7KRnnVq90rZ9lNvEccmM=",
       "Blazored.TextEditor.dll": "sha256-6o6WOuk4mnjpW8SpSUUlvO2Fv+LMQTgHlBwaZhDcwDE=",
       "Blazored.Toast.dll": "sha256-6wGoA8FmxkQCTFIXEM+U+Y2kJJnSTJXRYwuByAUPWGU=",
       "Blazorise.dll": "sha256-teUuJLNdaQyz7kSZJpp+7v3d2aD3GZ0iElUCByVsjuU=",
